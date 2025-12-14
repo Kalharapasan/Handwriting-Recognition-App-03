@@ -91,6 +91,10 @@ class AdvancedDatabaseManager:
     def get_system_analytics(self):
         total_users = self.session.query(User).count()
         active_users = self.session.query(User).filter_by(is_active=True).count()
+        total_predictions = self.session.query(PredictionHistory).count()
+        recent_predictions = self.session.query(PredictionHistory).filter(
+            PredictionHistory.timestamp >= datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+        ).count()
         
     
     def export_user_data(self, user_id, format='csv'):
