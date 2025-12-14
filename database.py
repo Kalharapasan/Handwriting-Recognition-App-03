@@ -88,6 +88,22 @@ User.predictions = relationship("PredictionHistory", order_by=PredictionHistory.
 
 class AdvancedDatabaseManager:
     
+    def add_prediction(self, user_id, predicted_digit, confidence, image_path, user_input_type, file_name, processing_time, image_size, model_version):
+        prediction = PredictionHistory(
+            user_id=user_id,
+            predicted_digit=predicted_digit,
+            confidence=confidence,
+            image_path=image_path,
+            user_input_type=user_input_type,
+            file_name=file_name,
+            processing_time=processing_time,
+            image_size=image_size,
+            model_version=model_version
+        )
+        self.session.add(prediction)
+        self.session.commit()
+        return prediction.id
+    
     def add_feedback(self, prediction_id, user_id, actual_digit, correct_prediction,confidence_rating=None, comments="", suggested_improvement=""):
         feedback = UserFeedback(
             prediction_id=prediction_id,
