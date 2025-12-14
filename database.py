@@ -98,6 +98,11 @@ class AdvancedDatabaseManager:
         total_predictions = len(predictions)
         avg_confidence = np.mean([p.confidence for p in predictions])
         avg_processing_time = np.mean([p.processing_time for p in predictions])
+        if feedbacks:
+            correct_predictions = sum(1 for f in feedbacks if f.correct_prediction)
+            user_accuracy = correct_predictions / len(feedbacks)
+        else:
+            user_accuracy = 0
         
     
     def get_system_analytics(self):
