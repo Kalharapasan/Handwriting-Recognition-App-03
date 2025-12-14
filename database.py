@@ -85,3 +85,6 @@ class SystemLog(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
 
 User.predictions = relationship("PredictionHistory", order_by=PredictionHistory.id, back_populates="user")
+
+class AdvancedDatabaseManager:
+    
