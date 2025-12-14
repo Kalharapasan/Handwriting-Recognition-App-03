@@ -88,6 +88,13 @@ User.predictions = relationship("PredictionHistory", order_by=PredictionHistory.
 
 class AdvancedDatabaseManager:
     
+    def get_user_stats(self, user_id):
+        predictions = self.session.query(PredictionHistory).filter_by(user_id=user_id).all()
+        feedbacks = self.session.query(UserFeedback).filter_by(user_id=user_id).all()
+        
+        if not predictions:
+            return None
+    
     def get_system_analytics(self):
         total_users = self.session.query(User).count()
         active_users = self.session.query(User).filter_by(is_active=True).count()
