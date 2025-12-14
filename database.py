@@ -95,6 +95,11 @@ class AdvancedDatabaseManager:
         recent_predictions = self.session.query(PredictionHistory).filter(
             PredictionHistory.timestamp >= datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
         ).count()
+        feedbacks = self.session.query(UserFeedback).all()
+        if feedbacks:
+            system_accuracy = sum(1 for f in feedbacks if f.correct_prediction) / len(feedbacks)
+        else:
+            system_accuracy = 0
         
     
     def export_user_data(self, user_id, format='csv'):
