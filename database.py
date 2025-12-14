@@ -88,6 +88,9 @@ User.predictions = relationship("PredictionHistory", order_by=PredictionHistory.
 
 class AdvancedDatabaseManager:
     
+    def get_system_analytics(self):
+        
+    
     def export_user_data(self, user_id, format='csv'):
         predictions = self.session.query(PredictionHistory).filter_by(user_id=user_id).all()
         feedbacks = self.session.query(UserFeedback).filter_by(user_id=user_id).all()
