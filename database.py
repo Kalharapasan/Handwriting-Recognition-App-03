@@ -88,6 +88,39 @@ User.predictions = relationship("PredictionHistory", order_by=PredictionHistory.
 
 class AdvancedDatabaseManager:
     
+    def export_user_data(self, user_id, format='csv'):
+        predictions = self.session.query(PredictionHistory).filter_by(user_id=user_id).all()
+        feedbacks = self.session.query(UserFeedback).filter_by(user_id=user_id).all()
+        
+        prediction_data = []
+        for p in predictions:
+            prediction_data.append({
+                'timestamp': p.timestamp,
+                'predicted_digit': p.predicted_digit,
+                'confidence': p.confidence,
+                'input_type': p.user_input_type,
+                'processing_time': p.processing_time
+            })
+        
+        feedback_data = []
+        for f in feedbacks:
+            feedback_data.append({
+                'timestamp': f.timestamp,
+                'actual_digit': f.actual_digit,
+                'correct_prediction': f.correct_prediction,
+                'confidence_rating': f.confidence_rating,
+                'comments': f.comments
+            })
+        
+        if format == 'csv':
+            pred_df = pd.DataFrame(prediction_data)
+            feedback_df = pd.DataFrame(feedback_data)
+            return pred_df, feedback_df
+        elif format == 'json':
+            return {
+                'predictions': prediction_data,
+                'feedbacks': feedback_data
+            }
     
     def log_system_event(self, log_level, module, message, user_id=None):
         log = SystemLog(
