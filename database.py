@@ -88,3 +88,14 @@ User.predictions = relationship("PredictionHistory", order_by=PredictionHistory.
 
 class AdvancedDatabaseManager:
     
+    
+    def log_system_event(self, log_level, module, message, user_id=None):
+        log = SystemLog(
+            log_level=log_level,
+            module=module,
+            message=message,
+            user_id=user_id
+        )
+        self.session.add(log)
+        self.session.commit()
+    
