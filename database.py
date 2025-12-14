@@ -48,3 +48,16 @@ class UserFeedback(Base):
     confidence_rating = Column(Integer)  # 1-5 scale
     comments = Column(Text)
     suggested_improvement = Column(Text)
+
+class ModelPerformance(Base):
+    __tablename__ = 'model_performance'
+    
+    id = Column(Integer, primary_key=True)
+    timestamp = Column(DateTime, default=datetime.utcnow)
+    accuracy = Column(Float)
+    loss = Column(Float)
+    validation_accuracy = Column(Float)
+    validation_loss = Column(Float)
+    training_time = Column(Float)
+    model_architecture = Column(Text)
+    hyperparameters = Column(JSON)
