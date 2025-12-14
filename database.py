@@ -45,7 +45,7 @@ class UserFeedback(Base):
     timestamp = Column(DateTime, default=datetime.utcnow)
     actual_digit = Column(Integer)
     correct_prediction = Column(Boolean)
-    confidence_rating = Column(Integer)  # 1-5 scale
+    confidence_rating = Column(Integer)  
     comments = Column(Text)
     suggested_improvement = Column(Text)
 
@@ -61,3 +61,15 @@ class ModelPerformance(Base):
     training_time = Column(Float)
     model_architecture = Column(Text)
     hyperparameters = Column(JSON)
+
+class CustomDataset(Base):
+    __tablename__ = 'custom_dataset'
+    
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    timestamp = Column(DateTime, default=datetime.utcnow)
+    image_path = Column(String(500))
+    actual_digit = Column(Integer)
+    is_verified = Column(Boolean, default=False)
+    dataset_type = Column(String(50))  
+    metadata = Column(JSON)
