@@ -94,6 +94,11 @@ class AdvancedDatabaseManager:
         
         if not predictions:
             return None
+
+        total_predictions = len(predictions)
+        avg_confidence = np.mean([p.confidence for p in predictions])
+        avg_processing_time = np.mean([p.processing_time for p in predictions])
+        
     
     def get_system_analytics(self):
         total_users = self.session.query(User).count()
