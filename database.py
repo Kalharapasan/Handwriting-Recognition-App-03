@@ -87,6 +87,13 @@ class SystemLog(Base):
 User.predictions = relationship("PredictionHistory", order_by=PredictionHistory.id, back_populates="user")
 
 class AdvancedDatabaseManager:
+    def __init__(self, db_url=None):
+        self.db_url = db_url or config.DATABASE_URL
+        self.engine = create_engine(self.db_url)
+        Base.metadata.create_all(self.engine)
+        Session = sessionmaker(bind=self.engine)
+        self.session = Session()
+        
     def add_user(self, username, email=None):
         user = User(username=username, email=email)
         self.session.add(user)
@@ -235,4 +242,6 @@ class AdvancedDatabaseManager:
         )
         self.session.add(log)
         self.session.commit()
+
+db_manager = AdvancedDatabaseManager()
     
