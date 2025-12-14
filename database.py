@@ -100,6 +100,19 @@ class AdvancedDatabaseManager:
             system_accuracy = sum(1 for f in feedbacks if f.correct_prediction) / len(feedbacks)
         else:
             system_accuracy = 0
+        digit_stats = self.session.query(
+            PredictionHistory.predicted_digit,
+            func.count(PredictionHistory.id)
+        ).group_by(PredictionHistory.predicted_digit).all()
+        
+        return {
+            'total_users': total_users,
+            'active_users': active_users,
+            'total_predictions': total_predictions,
+            'today_predictions': recent_predictions,
+            'system_accuracy': system_accuracy,
+            'digit_distribution': dict(digit_stats)
+        }
         
     
     def export_user_data(self, user_id, format='csv'):
