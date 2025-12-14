@@ -35,3 +35,5 @@ class Config:
         
         for directory in directories:
             os.makedirs(directory, exist_ok=True)
+config = Config()
+config.create_directories()
