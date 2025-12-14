@@ -12,3 +12,26 @@ class Config:
     EPOCHS = 100
     MAX_FILE_SIZE = 50 * 1024 * 1024  
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'bmp', 'pdf', 'txt'}
+    ENABLE_REAL_TIME_TRAINING = True
+    ENABLE_MULTI_USER = True
+    ENABLE_ADVANCED_ANALYTICS = True
+    
+    @staticmethod
+    def get_timestamp():
+        return datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    @staticmethod
+    def create_directories():
+        """Create necessary directories"""
+        directories = [
+            'models/model_history',
+            'data/uploaded/images',
+            'data/uploaded/documents',
+            'data/uploaded/drawings',
+            'data/custom_dataset',
+            'static/css',
+            'static/images'
+        ]
+        
+        for directory in directories:
+            os.makedirs(directory, exist_ok=True)
