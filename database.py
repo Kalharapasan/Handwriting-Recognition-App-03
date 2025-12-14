@@ -89,6 +89,8 @@ User.predictions = relationship("PredictionHistory", order_by=PredictionHistory.
 class AdvancedDatabaseManager:
     
     def get_system_analytics(self):
+        total_users = self.session.query(User).count()
+        active_users = self.session.query(User).filter_by(is_active=True).count()
         
     
     def export_user_data(self, user_id, format='csv'):
