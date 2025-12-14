@@ -104,6 +104,20 @@ class AdvancedDatabaseManager:
         else:
             user_accuracy = 0
         
+        digit_counts = {}
+        for p in predictions:
+            digit_counts[p.predicted_digit] = digit_counts.get(p.predicted_digit, 0) + 1
+        most_common_digit = max(digit_counts.items(), key=lambda x: x[1])[0] if digit_counts else None
+        
+        return {
+            'total_predictions': total_predictions,
+            'user_accuracy': user_accuracy,
+            'average_confidence': avg_confidence,
+            'average_processing_time': avg_processing_time,
+            'most_common_digit': most_common_digit,
+            'feedback_count': len(feedbacks)
+        }
+        
     
     def get_system_analytics(self):
         total_users = self.session.query(User).count()
