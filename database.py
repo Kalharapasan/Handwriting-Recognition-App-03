@@ -87,6 +87,11 @@ class SystemLog(Base):
 User.predictions = relationship("PredictionHistory", order_by=PredictionHistory.id, back_populates="user")
 
 class AdvancedDatabaseManager:
+    def add_user(self, username, email=None):
+        user = User(username=username, email=email)
+        self.session.add(user)
+        self.session.commit()
+        return user.id
     
     def add_prediction(self, user_id, predicted_digit, confidence, image_path, user_input_type, file_name, processing_time, image_size, model_version):
         prediction = PredictionHistory(
