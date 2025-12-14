@@ -35,3 +35,16 @@ class PredictionHistory(Base):
     model_version = Column(String(100))
     
     user = relationship("User", back_populates="predictions")
+
+class UserFeedback(Base):
+    __tablename__ = 'user_feedback'
+    
+    id = Column(Integer, primary_key=True)
+    prediction_id = Column(Integer, ForeignKey('prediction_history.id'))
+    user_id = Column(Integer, ForeignKey('users.id'))
+    timestamp = Column(DateTime, default=datetime.utcnow)
+    actual_digit = Column(Integer)
+    correct_prediction = Column(Boolean)
+    confidence_rating = Column(Integer)  # 1-5 scale
+    comments = Column(Text)
+    suggested_improvement = Column(Text)
