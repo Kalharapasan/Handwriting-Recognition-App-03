@@ -88,6 +88,19 @@ User.predictions = relationship("PredictionHistory", order_by=PredictionHistory.
 
 class AdvancedDatabaseManager:
     
+    def add_feedback(self, prediction_id, user_id, actual_digit, correct_prediction,confidence_rating=None, comments="", suggested_improvement=""):
+        feedback = UserFeedback(
+            prediction_id=prediction_id,
+            user_id=user_id,
+            actual_digit=actual_digit,
+            correct_prediction=correct_prediction,
+            confidence_rating=confidence_rating,
+            comments=comments,
+            suggested_improvement=suggested_improvement
+        )
+        self.session.add(feedback)
+        self.session.commit()
+    
     def add_custom_dataset_entry(self, user_id, image_path, actual_digit,dataset_type='training', metadata=None):
         entry = CustomDataset(
             user_id=user_id,
