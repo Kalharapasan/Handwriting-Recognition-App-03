@@ -10,3 +10,5 @@ class Config:
     IMG_WIDTH = 28
     BATCH_SIZE = 32
     EPOCHS = 100
+    MAX_FILE_SIZE = 50 * 1024 * 1024  
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'bmp', 'pdf', 'txt'}
