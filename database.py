@@ -73,3 +73,15 @@ class CustomDataset(Base):
     is_verified = Column(Boolean, default=False)
     dataset_type = Column(String(50))  
     metadata = Column(JSON)
+
+class SystemLog(Base):
+    __tablename__ = 'system_logs'
+    
+    id = Column(Integer, primary_key=True)
+    timestamp = Column(DateTime, default=datetime.utcnow)
+    log_level = Column(String(20))  
+    module = Column(String(100))
+    message = Column(Text)
+    user_id = Column(Integer, ForeignKey('users.id'))
+
+User.predictions = relationship("PredictionHistory", order_by=PredictionHistory.id, back_populates="user")
