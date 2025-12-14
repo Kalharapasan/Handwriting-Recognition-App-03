@@ -18,3 +18,20 @@ class User(Base):
     email = Column(String(200), unique=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     is_active = Column(Boolean, default=True)
+
+class PredictionHistory(Base):
+    __tablename__ = 'prediction_history'
+    
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    timestamp = Column(DateTime, default=datetime.utcnow)
+    predicted_digit = Column(Integer)
+    confidence = Column(Float)
+    image_path = Column(String(500))
+    user_input_type = Column(String(50))
+    file_name = Column(String(255))
+    processing_time = Column(Float)
+    image_size = Column(String(50))
+    model_version = Column(String(100))
+    
+    user = relationship("User", back_populates="predictions")
