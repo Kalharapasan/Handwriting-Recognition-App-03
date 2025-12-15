@@ -137,3 +137,12 @@ class AdvancedModelTrainer:
                 histogram_freq=1
             )
         ]
+        
+        datagen = keras.preprocessing.image.ImageDataGenerator(
+            rotation_range=10,
+            width_shift_range=0.1,
+            height_shift_range=0.1,
+            zoom_range=0.1,
+            shear_range=0.1,
+            fill_mode='nearest'
+        )
