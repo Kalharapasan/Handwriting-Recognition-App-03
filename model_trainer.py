@@ -37,4 +37,13 @@ class AdvancedModelTrainer:
             for i in range(len(x_train)):
                 x_train_augmented.append(x_train[i])
                 y_train_augmented.append(y_train_cat[i])
+                for _ in range(2):  
+                    augmented_img = data_augmentor.augment_image(x_train[i].reshape(28, 28))
+                    x_train_augmented.append(augmented_img.reshape(28, 28, 1))
+                    y_train_augmented.append(y_train_cat[i])
+            
+            x_train = np.array(x_train_augmented)
+            y_train_cat = np.array(y_train_augmented)
+        
+        return (x_train, y_train_cat), (x_test, y_test_cat)
        
