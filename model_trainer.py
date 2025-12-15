@@ -46,4 +46,6 @@ class AdvancedModelTrainer:
             y_train_cat = np.array(y_train_augmented)
         
         return (x_train, y_train_cat), (x_test, y_test_cat)
+    
+    def create_advanced_model(self, hp=None):
        
