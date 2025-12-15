@@ -95,3 +95,12 @@ class AdvancedModelTrainer:
     def train_model(self, use_hyperparameter_tuning=False):
         start_time = time.time()
         (x_train, y_train), (x_test, y_test) = self.load_data(use_augmentation=True)
+        if use_hyperparameter_tuning:
+            tuner = kt.Hyperband(
+                self.create_advanced_model,
+                objective='val_accuracy',
+                max_epochs=50,
+                factor=3,
+                directory='models/model_history',
+                project_name='hyperparameter_tuning'
+            )
