@@ -48,4 +48,10 @@ class AdvancedModelTrainer:
         return (x_train, y_train_cat), (x_test, y_test_cat)
     
     def create_advanced_model(self, hp=None):
+        if hp:
+            filters_1 = hp.Int('filters_1', 32, 128, step=32)
+            filters_2 = hp.Int('filters_2', 64, 256, step=64)
+            dense_units = hp.Int('dense_units', 128, 512, step=128)
+            learning_rate = hp.Choice('learning_rate', [1e-2, 1e-3, 1e-4])
+            dropout_rate = hp.Float('dropout_rate', 0.2, 0.5, step=0.1)
        
