@@ -165,3 +165,17 @@ class AdvancedModelTrainer:
         test_loss, test_accuracy = self.model.evaluate(x_test, y_test, verbose=0)
         val_accuracy = max(self.history.history['val_accuracy'])
         
+        performance_data = {
+            'timestamp': datetime.utcnow(),
+            'accuracy': test_accuracy,
+            'loss': test_loss,
+            'validation_accuracy': val_accuracy,
+            'validation_loss': min(self.history.history['val_loss']),
+            'training_time': self.training_time,
+            'model_architecture': str(self.model.summary()),
+            'hyperparameters': {
+                'batch_size': config.BATCH_SIZE,
+                'epochs': config.EPOCHS,
+                'optimizer': 'Adam'
+            }
+        }
