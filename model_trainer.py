@@ -91,3 +91,6 @@ class AdvancedModelTrainer:
         )
         
         return model
+    
+    def train_model(self, use_hyperparameter_tuning=False):
+        start_time = time.time()
