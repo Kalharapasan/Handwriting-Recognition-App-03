@@ -160,5 +160,8 @@ class AdvancedModelTrainer:
         self._log_training_performance(x_test, y_test)
         
         return self.history
-        
+    
+    def _log_training_performance(self, x_test, y_test):
+        test_loss, test_accuracy = self.model.evaluate(x_test, y_test, verbose=0)
+        val_accuracy = max(self.history.history['val_accuracy'])
         
