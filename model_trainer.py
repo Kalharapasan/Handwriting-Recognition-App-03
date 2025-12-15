@@ -109,3 +109,5 @@ class AdvancedModelTrainer:
             tuner.search(x_train, y_train, epochs=50, validation_split=0.2, callbacks=[stop_early])
             best_hps = tuner.get_best_hyperparameters(num_trials=1)[0]
             self.model = tuner.hypermodel.build(best_hps)
+        else:
+            self.model = self.create_advanced_model()
