@@ -226,3 +226,28 @@ class AdvancedModelTrainer:
         ax2.set_ylabel('Loss')
         ax2.legend()
         ax2.grid(True)
+        
+        if 'precision' in self.history.history:
+            ax3.plot(self.history.history['precision'], label='Training Precision')
+            ax3.plot(self.history.history['val_precision'], label='Validation Precision')
+            ax3.set_title('Model Precision')
+            ax3.set_xlabel('Epoch')
+            ax3.set_ylabel('Precision')
+            ax3.legend()
+            ax3.grid(True)
+        
+        if 'recall' in self.history.history:
+            ax4.plot(self.history.history['recall'], label='Training Recall')
+            ax4.plot(self.history.history['val_recall'], label='Validation Recall')
+            ax4.set_title('Model Recall')
+            ax4.set_xlabel('Epoch')
+            ax4.set_ylabel('Recall')
+            ax4.legend()
+            ax4.grid(True)
+        
+        plt.tight_layout()
+        
+        if save_path:
+            plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        
+        return fig
