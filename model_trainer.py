@@ -84,3 +84,10 @@ class AdvancedModelTrainer:
             layers.Dropout(dropout_rate),
             layers.Dense(10, activation='softmax')
         ])
+        model.compile(
+            optimizer=keras.optimizers.Adam(learning_rate=learning_rate),
+            loss='categorical_crossentropy',
+            metrics=['accuracy', 'precision', 'recall']
+        )
+        
+        return model
