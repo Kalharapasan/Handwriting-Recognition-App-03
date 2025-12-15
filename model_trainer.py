@@ -14,3 +14,9 @@ import keras_tuner as kt
 from utils import data_augmentor
 from database import db_manager
 from config import config
+
+class AdvancedModelTrainer:
+    def __init__(self):
+        self.model = None
+        self.history = None
+        self.training_time = 0
