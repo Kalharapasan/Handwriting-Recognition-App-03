@@ -255,3 +255,7 @@ class AdvancedModelTrainer:
 if __name__ == "__main__":
     trainer = AdvancedModelTrainer()
     history = trainer.train_model(use_hyperparameter_tuning=False)
+    (x_train, y_train), (x_test, y_test) = trainer.load_data(use_augmentation=False)
+    results = trainer.evaluate_model(x_test, y_test)
+    
+    print(f"Model training completed with {results['test_accuracy']:.4f} accuracy")
