@@ -218,3 +218,11 @@ class AdvancedModelTrainer:
         ax1.set_ylabel('Accuracy')
         ax1.legend()
         ax1.grid(True)
+        
+        ax2.plot(self.history.history['loss'], label='Training Loss')
+        ax2.plot(self.history.history['val_loss'], label='Validation Loss')
+        ax2.set_title('Model Loss')
+        ax2.set_xlabel('Epoch')
+        ax2.set_ylabel('Loss')
+        ax2.legend()
+        ax2.grid(True)
