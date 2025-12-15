@@ -208,3 +208,6 @@ class AdvancedModelTrainer:
         }
         
         return evaluation_results
+    
+    def plot_training_history(self, save_path=None):
+        fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 10))
