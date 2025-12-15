@@ -211,3 +211,10 @@ class AdvancedModelTrainer:
     
     def plot_training_history(self, save_path=None):
         fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 10))
+        ax1.plot(self.history.history['accuracy'], label='Training Accuracy')
+        ax1.plot(self.history.history['val_accuracy'], label='Validation Accuracy')
+        ax1.set_title('Model Accuracy')
+        ax1.set_xlabel('Epoch')
+        ax1.set_ylabel('Accuracy')
+        ax1.legend()
+        ax1.grid(True)
