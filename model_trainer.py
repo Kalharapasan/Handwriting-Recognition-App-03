@@ -156,4 +156,6 @@ class AdvancedModelTrainer:
         )
         
         self.training_time = time.time() - start_time
+        self.model.save(config.MODEL_PATH)
+        
         
