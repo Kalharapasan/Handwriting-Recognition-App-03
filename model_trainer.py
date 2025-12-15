@@ -191,3 +191,20 @@ class AdvancedModelTrainer:
         y_true_classes = np.argmax(y_test, axis=1)
         cm = confusion_matrix(y_true_classes, y_pred_classes)
         report = classification_report(y_true_classes, y_pred_classes, output_dict=True)
+        class_accuracy = {}
+        for i in range(10):
+            class_mask = y_true_classes == i
+            if np.sum(class_mask) > 0:
+                class_accuracy[i] = np.mean(y_pred_classes[class_mask] == i)
+        
+        evaluation_results = {
+            'test_accuracy': test_accuracy,
+            'test_loss': test_loss,
+            'confusion_matrix': cm,
+            'classification_report': report,
+            'class_accuracy': class_accuracy,
+            'predictions': y_pred_classes,
+            'true_labels': y_true_classes
+        }
+        
+        return evaluation_results
