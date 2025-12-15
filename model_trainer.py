@@ -29,4 +29,12 @@ class AdvancedModelTrainer:
         x_test = x_test.reshape(-1, 28, 28, 1)
         y_train_cat = keras.utils.to_categorical(y_train, 10)
         y_test_cat = keras.utils.to_categorical(y_test, 10)
+        
+        if use_augmentation:
+            x_train_augmented = []
+            y_train_augmented = []
+            
+            for i in range(len(x_train)):
+                x_train_augmented.append(x_train[i])
+                y_train_augmented.append(y_train_cat[i])
        
