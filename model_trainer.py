@@ -185,4 +185,4 @@ class AdvancedModelTrainer:
         print(f"Validation Accuracy: {val_accuracy:.4f}")
         
     def evaluate_model(self, x_test, y_test):
-        
+        test_loss, test_accuracy = self.model.evaluate(x_test, y_test, verbose=0)
