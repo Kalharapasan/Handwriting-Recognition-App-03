@@ -106,3 +106,4 @@ class AdvancedModelTrainer:
             )
             
             stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
+            tuner.search(x_train, y_train, epochs=50, validation_split=0.2, callbacks=[stop_early])
