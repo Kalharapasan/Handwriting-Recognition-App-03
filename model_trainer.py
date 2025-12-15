@@ -61,7 +61,6 @@ class AdvancedModelTrainer:
             learning_rate = 1e-3
             dropout_rate = 0.3
         model = keras.Sequential([
-            # First convolutional block
             layers.Conv2D(filters_1, (3, 3), activation='relu', input_shape=(28, 28, 1)),
             layers.BatchNormalization(),
             layers.Conv2D(filters_1, (3, 3), activation='relu'),
