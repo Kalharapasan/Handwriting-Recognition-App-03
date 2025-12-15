@@ -83,5 +83,4 @@ class AdvancedModelTrainer:
             layers.Dense(dense_units // 2, activation='relu'),
             layers.Dropout(dropout_rate),
             layers.Dense(10, activation='softmax')
-            
         ])
