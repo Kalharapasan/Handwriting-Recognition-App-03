@@ -73,4 +73,8 @@ class AdvancedModelTrainer:
             layers.BatchNormalization(),
             layers.MaxPooling2D((2, 2)),
             layers.Dropout(dropout_rate),
+            layers.Conv2D(filters_2, (3, 3), activation='relu'),
+            layers.BatchNormalization(),
+            layers.Dropout(dropout_rate),
+            
         ])
