@@ -22,4 +22,5 @@ class AdvancedModelTrainer:
         self.training_time = 0
     
     def load_data(self, use_augmentation=True):
+        (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data
        
