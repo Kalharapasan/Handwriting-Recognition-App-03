@@ -186,3 +186,6 @@ class AdvancedModelTrainer:
         
     def evaluate_model(self, x_test, y_test):
         test_loss, test_accuracy = self.model.evaluate(x_test, y_test, verbose=0)
+        y_pred = self.model.predict(x_test)
+        y_pred_classes = np.argmax(y_pred, axis=1)
+        y_true_classes = np.argmax(y_test, axis=1)
