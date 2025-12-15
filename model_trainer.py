@@ -76,5 +76,12 @@ class AdvancedModelTrainer:
             layers.Conv2D(filters_2, (3, 3), activation='relu'),
             layers.BatchNormalization(),
             layers.Dropout(dropout_rate),
+            layers.Flatten(),
+            layers.Dense(dense_units, activation='relu'),
+            layers.BatchNormalization(),
+            layers.Dropout(dropout_rate + 0.2),
+            layers.Dense(dense_units // 2, activation='relu'),
+            layers.Dropout(dropout_rate),
+            layers.Dense(10, activation='softmax')
             
         ])
