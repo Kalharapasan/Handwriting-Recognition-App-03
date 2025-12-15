@@ -251,3 +251,7 @@ class AdvancedModelTrainer:
             plt.savefig(save_path, dpi=300, bbox_inches='tight')
         
         return fig
+    
+if __name__ == "__main__":
+    trainer = AdvancedModelTrainer()
+    history = trainer.train_model(use_hyperparameter_tuning=False)
