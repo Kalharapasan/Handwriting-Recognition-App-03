@@ -190,3 +190,4 @@ class AdvancedModelTrainer:
         y_pred_classes = np.argmax(y_pred, axis=1)
         y_true_classes = np.argmax(y_test, axis=1)
         cm = confusion_matrix(y_true_classes, y_pred_classes)
+        report = classification_report(y_true_classes, y_pred_classes, output_dict=True)
