@@ -179,3 +179,7 @@ class AdvancedModelTrainer:
                 'optimizer': 'Adam'
             }
         }
+        
+        print(f"Training completed in {self.training_time:.2f} seconds")
+        print(f"Test Accuracy: {test_accuracy:.4f}")
+        print(f"Validation Accuracy: {val_accuracy:.4f}")
