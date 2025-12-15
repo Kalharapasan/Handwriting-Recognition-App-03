@@ -94,3 +94,4 @@ class AdvancedModelTrainer:
     
     def train_model(self, use_hyperparameter_tuning=False):
         start_time = time.time()
+        (x_train, y_train), (x_test, y_test) = self.load_data(use_augmentation=True)
