@@ -104,3 +104,5 @@ class AdvancedModelTrainer:
                 directory='models/model_history',
                 project_name='hyperparameter_tuning'
             )
+            
+            stop_early = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5)
