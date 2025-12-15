@@ -20,3 +20,6 @@ class AdvancedModelTrainer:
         self.model = None
         self.history = None
         self.training_time = 0
+    
+    def load_data(self, use_augmentation=True):
+       
