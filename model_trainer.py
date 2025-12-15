@@ -111,3 +111,29 @@ class AdvancedModelTrainer:
             self.model = tuner.hypermodel.build(best_hps)
         else:
             self.model = self.create_advanced_model()
+        
+        callbacks = [
+            keras.callbacks.EarlyStopping(
+                monitor='val_accuracy',
+                patience=15,
+                restore_best_weights=True,
+                mode='max'
+            ),
+            keras.callbacks.ReduceLROnPlateau(
+                monitor='val_loss',
+                factor=0.5,
+                patience=5,
+                min_lr=1e-7
+            ),
+            keras.callbacks.ModelCheckpoint(
+                'models/best_model.h5',
+                monitor='val_accuracy',
+                save_best_only=True,
+                mode='max'
+            ),
+            keras.callbacks.CSVLogger('models/training_history.csv'),
+            keras.callbacks.TensorBoard(
+                log_dir='models/tensorboard_logs',
+                histogram_freq=1
+            )
+        ]
