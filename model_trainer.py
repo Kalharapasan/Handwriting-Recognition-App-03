@@ -146,3 +146,14 @@ class AdvancedModelTrainer:
             shear_range=0.1,
             fill_mode='nearest'
         )
+        
+        self.history = self.model.fit(
+            datagen.flow(x_train, y_train, batch_size=config.BATCH_SIZE),
+            epochs=config.EPOCHS,
+            validation_data=(x_test, y_test),
+            callbacks=callbacks,
+            verbose=1
+        )
+        
+        self.training_time = time.time() - start_time
+        
