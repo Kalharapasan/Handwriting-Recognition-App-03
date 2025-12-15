@@ -54,4 +54,10 @@ class AdvancedModelTrainer:
             dense_units = hp.Int('dense_units', 128, 512, step=128)
             learning_rate = hp.Choice('learning_rate', [1e-2, 1e-3, 1e-4])
             dropout_rate = hp.Float('dropout_rate', 0.2, 0.5, step=0.1)
+        else:
+            filters_1 = 64
+            filters_2 = 128
+            dense_units = 256
+            learning_rate = 1e-3
+            dropout_rate = 0.3
        
