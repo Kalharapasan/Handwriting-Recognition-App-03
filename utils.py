@@ -47,6 +47,7 @@ class AdvancedImagePreprocessor:
         kernel = np.ones((2, 2), np.uint8)
         image = cv2.morphologyEx(image, cv2.MORPH_CLOSE, kernel)
         image = cv2.resize(image, target_size)
+        image = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY, 11, 2)
         
         
     
