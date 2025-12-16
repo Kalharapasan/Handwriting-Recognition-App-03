@@ -241,3 +241,8 @@ class DataAugmentor:
             'elastic': DataAugmentor.elastic_transform,
             'noise': DataAugmentor.add_noise
         }
+        if augmentation_type == 'all':
+            aug_type = np.random.choice(list(augmentations.keys()))
+            return augmentations[aug_type](image)
+        else:
+            return augmentations.get(augmentation_type, lambda x: x)(image)
