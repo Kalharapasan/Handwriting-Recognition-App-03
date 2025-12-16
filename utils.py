@@ -75,3 +75,6 @@ class AdvancedImagePreprocessor:
             return AdvancedImagePreprocessor._extract_by_connected_components(gray)
         else:
             return AdvancedImagePreprocessor._extract_by_projection(gray)
+    
+    @staticmethod
+    def _extract_by_contour(gray_image):
