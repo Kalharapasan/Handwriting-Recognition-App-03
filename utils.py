@@ -147,3 +147,9 @@ class AdvancedModelManager:
         except Exception as e:
             logger.error(f"Error loading model: {str(e)}")
             self.model = None
+    
+    def predict_digit(self, image, return_all=False):
+        if self.model is None:
+            return 0, 0.0, {}
+        
+        start_time = time.time()
