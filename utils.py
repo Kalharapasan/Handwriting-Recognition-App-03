@@ -27,3 +27,4 @@ class AdvancedImagePreprocessor:
         elif enhancement_level == 2.0:
             image = AdvancedImagePreprocessor._advanced_preprocessing(image, target_size)
         else:
+            image = AdvancedImagePreprocessor._custom_preprocessing(image, target_size, enhancement_level)
