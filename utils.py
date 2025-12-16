@@ -53,4 +53,6 @@ class AdvancedImagePreprocessor:
     
     @staticmethod
     def _custom_preprocessing(image, target_size, enhancement_level):
-        
+        pil_image = Image.fromarray(image)
+        enhancer = ImageEnhance.Contrast(pil_image)
+        pil_image = enhancer.enhance(enhancement_level)
