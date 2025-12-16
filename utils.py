@@ -43,5 +43,6 @@ class AdvancedImagePreprocessor:
     
     @staticmethod
     def _advanced_preprocessing(image, target_size):
+        image = cv2.medianBlur(image, 3)
 
     
