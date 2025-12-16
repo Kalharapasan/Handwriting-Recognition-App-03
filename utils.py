@@ -110,4 +110,9 @@ class AdvancedImagePreprocessor:
                 digit_images.append(digit)
         
         return digit_images
+    
+    @staticmethod
+    def deskew_image(image):
+        
+
         
