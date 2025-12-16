@@ -170,3 +170,22 @@ class AdvancedModelManager:
         }
         
         return predicted_digit, confidence, result
+    
+    def predict_with_confidence_interval(self, image, n_iterations=10):
+        if self.model is None:
+            return 0, 0.0, 0.0
+        
+        predictions = []
+        for _ in range(n_iterations):
+            pred = self.model.predict(image, verbose=0)
+            predictions.append(pred[0])
+        
+        predictions = np.array(predictions)
+        mean_prediction = np.mean(predictions, axis=0)
+        std_prediction = np.std(predictions, axis=0)
+        
+        predicted_digit = np.argmax(mean_prediction)
+        confidence = mean_prediction[predicted_digit]
+        uncertainty = std_prediction[predicted_digit]
+        
+        return predicted_digit, confidence, uncertainty
