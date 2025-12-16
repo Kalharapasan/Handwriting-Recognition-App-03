@@ -202,3 +202,9 @@ class AdvancedModelManager:
         
         if not all_predictions:
             return 0, 0.0
+        
+        avg_predictions = np.mean(all_predictions, axis=0)
+        predicted_digit = np.argmax(avg_predictions[0])
+        confidence = np.max(avg_predictions[0])
+        
+        return predicted_digit, confidence
