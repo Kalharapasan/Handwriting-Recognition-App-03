@@ -56,3 +56,5 @@ class AdvancedImagePreprocessor:
         pil_image = Image.fromarray(image)
         enhancer = ImageEnhance.Contrast(pil_image)
         pil_image = enhancer.enhance(enhancement_level)
+        enhancer = ImageEnhance.Sharpness(pil_image)
+        pil_image = enhancer.enhance(1.5)
