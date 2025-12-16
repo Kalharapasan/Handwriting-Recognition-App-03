@@ -23,8 +23,7 @@ class AdvancedImagePreprocessor:
             image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
         
         if enhancement_level == 1.0:
-            # Basic preprocessing
             image = AdvancedImagePreprocessor._basic_preprocessing(image, target_size)
-        elif:
-            
+        elif enhancement_level == 2.0:
+            image = AdvancedImagePreprocessor._advanced_preprocessing(image, target_size)
         else:
