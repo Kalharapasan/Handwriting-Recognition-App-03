@@ -58,3 +58,4 @@ class AdvancedImagePreprocessor:
         pil_image = enhancer.enhance(enhancement_level)
         enhancer = ImageEnhance.Sharpness(pil_image)
         pil_image = enhancer.enhance(1.5)
+        image = np.array(pil_image)
