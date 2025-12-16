@@ -90,3 +90,5 @@ class AdvancedImagePreprocessor:
                     'bbox': (x, y, w, h),
                     'area': w * h
                 })
+        digit_images.sort(key=lambda x: x['bbox'][0])
+        return [d['image'] for d in digit_images]
