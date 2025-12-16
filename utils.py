@@ -246,3 +246,8 @@ class DataAugmentor:
             return augmentations[aug_type](image)
         else:
             return augmentations.get(augmentation_type, lambda x: x)(image)
+    
+    @staticmethod
+    def rotate_image(image, max_angle=15):
+        angle = np.random.uniform(-max_angle, max_angle)
+        return ndimage.rotate(image, angle, reshape=False, mode='nearest')
