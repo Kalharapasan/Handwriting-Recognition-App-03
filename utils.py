@@ -78,5 +78,8 @@ class AdvancedImagePreprocessor:
     
     @staticmethod
     def _extract_by_contour(gray_image):
-         _, thresh = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
-         contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        _, thresh = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        digit_images = []
+        for contour in contours:
+            x, y, w, h = cv2.boundingRect(contour)
