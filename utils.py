@@ -35,4 +35,4 @@ class AdvancedImagePreprocessor:
         return image, processing_time
     @staticmethod
     def _basic_preprocessing(image, target_size):
-        
+        image = cv2.resize(image, target_size)
