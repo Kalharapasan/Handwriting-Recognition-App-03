@@ -227,4 +227,6 @@ class OCRProcessor:
             digits = [int(char) for char in text if char.isdigit()]
             return digits
         except Exception as e:
+            logger.error(f"Digit OCR failed: {str(e)}")
+            return []
             
