@@ -153,3 +153,5 @@ class AdvancedModelManager:
             return 0, 0.0, {}
         
         start_time = time.time()
+        if len(image.shape) == 3:
+            image = image.reshape(1, 28, 28, 1)
