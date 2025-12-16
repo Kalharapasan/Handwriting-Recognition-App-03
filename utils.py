@@ -97,4 +97,17 @@ class AdvancedImagePreprocessor:
     def _extract_by_connected_components(gray_image):
         _, thresh = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
         num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(thresh, connectivity=8)
+        digit_images = []
+        for i in range(1, num_labels):  # Skip background
+            x = stats[i, cv2.CC_STAT_LEFT]
+            y = stats[i, cv2.CC_STAT_TOP]
+            w = stats[i, cv2.CC_STAT_WIDTH]
+            h = stats[i, cv2.CC_STAT_HEIGHT]
+            area = stats[i, cv2.CC_STAT_AREA]
+            
+            if 100 < area < 5000:  # Reasonable digit size
+                digit = gray_image[y:y+h, x:x+w]
+                digit_images.append(digit)
+        
+        return digit_images
         
