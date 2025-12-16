@@ -21,3 +21,10 @@ class AdvancedImagePreprocessor:
     def preprocess_image(image, target_size=(28, 28), enhancement_level=1.0):
         if len(image.shape) == 3:
             image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+        
+        if enhancement_level == 1.0:
+            # Basic preprocessing
+            image = AdvancedImagePreprocessor._basic_preprocessing(image, target_size)
+        elif:
+            
+        else:
