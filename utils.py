@@ -135,3 +135,15 @@ class AdvancedModelManager:
         self.model_version = "v2.0"
         self.performance_history = []
         self.load_model(model_path)
+        
+    def load_model(self, model_path):
+        try:
+            if model_path and os.path.exists(model_path):
+                self.model = keras.models.load_model(model_path)
+                logger.info(f"Model loaded successfully from {model_path}")
+            else:
+                logger.warning("No model found. Please train a model first.")
+                self.model = None
+        except Exception as e:
+            logger.error(f"Error loading model: {str(e)}")
+            self.model = None
