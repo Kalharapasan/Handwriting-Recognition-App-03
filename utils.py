@@ -78,3 +78,4 @@ class AdvancedImagePreprocessor:
     
     @staticmethod
     def _extract_by_contour(gray_image):
+         _, thresh = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
