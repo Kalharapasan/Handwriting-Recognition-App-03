@@ -36,3 +36,4 @@ class AdvancedImagePreprocessor:
     @staticmethod
     def _basic_preprocessing(image, target_size):
         image = cv2.resize(image, target_size)
+        _, image = cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
