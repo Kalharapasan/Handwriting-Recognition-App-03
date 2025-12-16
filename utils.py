@@ -59,3 +59,4 @@ class AdvancedImagePreprocessor:
         enhancer = ImageEnhance.Sharpness(pil_image)
         pil_image = enhancer.enhance(1.5)
         image = np.array(pil_image)
+        image = cv2.resize(image, target_size)
