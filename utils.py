@@ -83,3 +83,10 @@ class AdvancedImagePreprocessor:
         digit_images = []
         for contour in contours:
             x, y, w, h = cv2.boundingRect(contour)
+            if 20 < w < 200 and 20 < h < 200:
+                digit = gray_image[y:y+h, x:x+w]
+                digit_images.append({
+                    'image': digit,
+                    'bbox': (x, y, w, h),
+                    'area': w * h
+                })
