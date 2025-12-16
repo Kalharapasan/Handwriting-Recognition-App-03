@@ -210,4 +210,11 @@ class AdvancedModelManager:
         return predicted_digit, confidence
 
 class OCRProcessor:
-    
+    @staticmethod
+    def extract_text_from_image(image_path):
+        try:
+            text = pytesseract.image_to_string(image_path, config='--psm 6')
+            return text.strip()
+        except Exception as e:
+            logger.error(f"OCR processing failed: {str(e)}")
+            return ""
