@@ -259,3 +259,15 @@ class DataAugmentor:
         shift_y = np.random.uniform(-max_shift, max_shift) 
         transformation = np.float32([[1, 0, shift_x], [0, 1, shift_y]])
         return cv2.warpAffine(image, transformation, image.shape[1::-1])
+    
+    @staticmethod
+    def elastic_transform(image, alpha=34, sigma=4):
+        random_state = np.random.RandomState(None)
+        shape = image.shape
+        dx = random_state.rand(*shape) * 2 - 1
+        dy = random_state.rand(*shape) * 2 - 1
+        dx = cv2.GaussianBlur(dx, (0, 0), sigma) * alpha
+        dy = cv2.GaussianBlur(dy, (0, 0), sigma) * alpha
+        x, y = np.meshgrid(np.arange(shape[1]), np.arange(shape[0]))
+        indices = np.reshape(y + dy, (-1, 1)), np.reshape(x + dx, (-1, 1))
+        return ndimage.map_coordinates(image, indices, order=1).reshape(shape)
