@@ -92,3 +92,7 @@ class AdvancedImagePreprocessor:
                 })
         digit_images.sort(key=lambda x: x['bbox'][0])
         return [d['image'] for d in digit_images]
+    
+    @staticmethod
+    def _extract_by_connected_components(gray_image):
+        
