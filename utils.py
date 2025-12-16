@@ -224,7 +224,7 @@ class OCRProcessor:
         try:
             custom_config = r'--oem 3 --psm 6 outputbase digits'
             text = pytesseract.image_to_string(image_path, config=custom_config)
-            
-            
+            digits = [int(char) for char in text if char.isdigit()]
+            return digits
         except Exception as e:
             
