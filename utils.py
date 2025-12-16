@@ -271,3 +271,8 @@ class DataAugmentor:
         x, y = np.meshgrid(np.arange(shape[1]), np.arange(shape[0]))
         indices = np.reshape(y + dy, (-1, 1)), np.reshape(x + dx, (-1, 1))
         return ndimage.map_coordinates(image, indices, order=1).reshape(shape)
+
+model_manager = AdvancedModelManager(config.MODEL_PATH)
+image_preprocessor = AdvancedImagePreprocessor()
+ocr_processor = OCRProcessor()
+data_augmentor = DataAugmentor()
