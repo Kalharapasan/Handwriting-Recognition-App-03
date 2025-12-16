@@ -50,8 +50,7 @@ class AdvancedImagePreprocessor:
         image = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY, 11, 2)
         image = image.astype('float32') / 255.0
         return image
-        
-        
     
-
-    
+    @staticmethod
+    def _custom_preprocessing(image, target_size, enhancement_level):
+        
