@@ -129,4 +129,9 @@ class AdvancedImagePreprocessor:
         
         return rotated
 
-        
+class AdvancedModelManager:
+    def __init__(self, model_path=None):
+        self.model = None
+        self.model_version = "v2.0"
+        self.performance_history = []
+        self.load_model(model_path)
