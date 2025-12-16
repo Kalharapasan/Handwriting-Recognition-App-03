@@ -33,3 +33,6 @@ class AdvancedImagePreprocessor:
         logger.info(f"Image preprocessing completed in {processing_time:.3f}s")
         
         return image, processing_time
+    @staticmethod
+    def _basic_preprocessing(image, target_size):
+        
