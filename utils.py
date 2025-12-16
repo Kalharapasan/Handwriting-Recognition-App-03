@@ -19,3 +19,5 @@ logger = logging.getLogger(__name__)
 class AdvancedImagePreprocessor:
     @staticmethod
     def preprocess_image(image, target_size=(28, 28), enhancement_level=1.0):
+        if len(image.shape) == 3:
+            image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
