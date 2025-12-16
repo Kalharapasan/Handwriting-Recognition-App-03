@@ -12,3 +12,6 @@ from scipy import ndimage
 import imutils
 from config import config
 import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
