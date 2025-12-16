@@ -208,3 +208,6 @@ class AdvancedModelManager:
         confidence = np.max(avg_predictions[0])
         
         return predicted_digit, confidence
+
+class OCRProcessor:
+    
