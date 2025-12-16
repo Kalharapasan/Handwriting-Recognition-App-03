@@ -189,3 +189,16 @@ class AdvancedModelManager:
         uncertainty = std_prediction[predicted_digit]
         
         return predicted_digit, confidence, uncertainty
+    
+    def ensemble_predict(self, images, models=None):
+        if models is None:
+            models = [self.model]
+        
+        all_predictions = []
+        for model in models:
+            if model is not None:
+                pred = model.predict(images, verbose=0)
+                all_predictions.append(pred)
+        
+        if not all_predictions:
+            return 0, 0.0
