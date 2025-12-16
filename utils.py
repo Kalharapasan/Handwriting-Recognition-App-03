@@ -28,3 +28,8 @@ class AdvancedImagePreprocessor:
             image = AdvancedImagePreprocessor._advanced_preprocessing(image, target_size)
         else:
             image = AdvancedImagePreprocessor._custom_preprocessing(image, target_size, enhancement_level)
+        
+        processing_time = time.time() - start_time
+        logger.info(f"Image preprocessing completed in {processing_time:.3f}s")
+        
+        return image, processing_time
