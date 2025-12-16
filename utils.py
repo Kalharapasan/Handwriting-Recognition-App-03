@@ -231,4 +231,13 @@ class OCRProcessor:
             return []
             
 class DataAugmentor:
-    
+    @staticmethod
+    def augment_image(image, augmentation_type='all'):
+
+        augmentations = {
+            'rotation': DataAugmentor.rotate_image,
+            'translation': DataAugmentor.translate_image,
+            'scaling': DataAugmentor.scale_image,
+            'elastic': DataAugmentor.elastic_transform,
+            'noise': DataAugmentor.add_noise
+        }
