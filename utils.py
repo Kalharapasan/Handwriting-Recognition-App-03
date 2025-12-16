@@ -113,6 +113,12 @@ class AdvancedImagePreprocessor:
     
     @staticmethod
     def deskew_image(image):
+        coords = np.column_stack(np.where(image > 0))
+        angle = cv2.minAreaRect(coords)[-1]
         
+        if angle < -45:
+            angle = -(90 + angle)
+        else:
+            angle = -angle
 
         
