@@ -15,3 +15,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+class AdvancedImagePreprocessor:
+    @staticmethod
+    def preprocess_image(image, target_size=(28, 28), enhancement_level=1.0):
