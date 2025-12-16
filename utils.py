@@ -155,3 +155,18 @@ class AdvancedModelManager:
         start_time = time.time()
         if len(image.shape) == 3:
             image = image.reshape(1, 28, 28, 1)
+        predictions = self.model.predict(image, verbose=0)
+        predicted_digit = np.argmax(predictions[0])
+        confidence = np.max(predictions[0])
+        
+        processing_time = time.time() - start_time
+        
+        result = {
+            'digit': predicted_digit,
+            'confidence': confidence,
+            'processing_time': processing_time,
+            'all_predictions': predictions[0] if return_all else None,
+            'timestamp': time.time()
+        }
+        
+        return predicted_digit, confidence, result
