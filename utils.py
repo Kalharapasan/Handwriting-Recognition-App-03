@@ -66,3 +66,12 @@ class AdvancedImagePreprocessor:
     
     @staticmethod
     def extract_digits_from_image(image_path, method='contour'):
+        image = cv2.imread(image_path)
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        
+        if method == 'contour':
+            return AdvancedImagePreprocessor._extract_by_contour(gray)
+        elif method == 'connected_components':
+            return AdvancedImagePreprocessor._extract_by_connected_components(gray)
+        else:
+            return AdvancedImagePreprocessor._extract_by_projection(gray)
