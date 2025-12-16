@@ -218,3 +218,6 @@ class OCRProcessor:
         except Exception as e:
             logger.error(f"OCR processing failed: {str(e)}")
             return ""
+    
+    @staticmethod
+    def extract_digits_with_ocr(image_path):
