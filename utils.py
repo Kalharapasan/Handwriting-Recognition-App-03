@@ -221,3 +221,10 @@ class OCRProcessor:
     
     @staticmethod
     def extract_digits_with_ocr(image_path):
+        try:
+            custom_config = r'--oem 3 --psm 6 outputbase digits'
+            text = pytesseract.image_to_string(image_path, config=custom_config)
+            
+            
+        except Exception as e:
+            
