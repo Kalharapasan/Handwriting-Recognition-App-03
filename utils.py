@@ -251,3 +251,11 @@ class DataAugmentor:
     def rotate_image(image, max_angle=15):
         angle = np.random.uniform(-max_angle, max_angle)
         return ndimage.rotate(image, angle, reshape=False, mode='nearest')
+
+    
+    @staticmethod
+    def translate_image(image, max_shift=2):
+        shift_x = np.random.uniform(-max_shift, max_shift)
+        shift_y = np.random.uniform(-max_shift, max_shift) 
+        transformation = np.float32([[1, 0, shift_x], [0, 1, shift_y]])
+        return cv2.warpAffine(image, transformation, image.shape[1::-1])
