@@ -230,3 +230,5 @@ class OCRProcessor:
             logger.error(f"Digit OCR failed: {str(e)}")
             return []
             
+class DataAugmentor:
+    
