@@ -77,3 +77,8 @@ def test_model_status():
 
 def test_prediction_base64():
     print_info("Testing prediction (base64)...")
+    try:
+        img = create_test_digit_image(5)
+        img_base64 = image_to_base64(img)
+        
+    except Exception as e:
