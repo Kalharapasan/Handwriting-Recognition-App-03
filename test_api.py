@@ -238,3 +238,25 @@ def test_create_user():
 
 def test_feedback():
     print_info("Testing feedback submission...")
+    try:
+        img = create_test_digit_image(3)
+        img_base64 = image_to_base64(img)
+        
+        pred_response = requests.post(
+            f"{BASE_URL}/api/predict",
+            json={
+                "image_data": f"data:image/png;base64,{img_base64}",
+                "user_id": TEST_USER_ID
+            }
+        )
+        
+        if pred_response.status_code != 200:
+            print_error("Could not create prediction for feedback test")
+            return False
+        
+        pred_data = pred_response.json()
+        prediction_id = pred_data['prediction_id']
+    
+    except Exception as e:
+        print_error(f"Feedback error: {str(e)}")
+        return False
