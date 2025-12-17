@@ -114,6 +114,8 @@ def test_prediction_upload():
         buffer = BytesIO()
         img.save(buffer, format='PNG')
         buffer.seek(0)
+        files = {'file': ('test_digit.png', buffer, 'image/png')}
+        data = {'user_id': TEST_USER_ID}
     
     except Exception as e:
         print_error(f"Upload prediction error: {str(e)}")
