@@ -103,5 +103,6 @@ def test_prediction_base64():
         else:
             print_error(f"Prediction failed with status {response.status_code}")
             return False
-        
     except Exception as e:
+        print_error(f"Prediction error: {str(e)}")
+        return False
