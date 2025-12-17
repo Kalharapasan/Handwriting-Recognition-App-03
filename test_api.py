@@ -138,3 +138,27 @@ def test_prediction_upload():
     except Exception as e:
         print_error(f"Upload prediction error: {str(e)}")
         return False
+    
+def test_system_analytics():
+    print_info("Testing system analytics...")
+    try:
+        response = requests.get(f"{BASE_URL}/api/analytics/system")
+        
+        if response.status_code == 200:
+            data = response.json()
+            if data['success']:
+                analytics = data['data']
+                print_success("System analytics retrieved")
+                print_info(f"  Total users: {analytics['total_users']}")
+                print_info(f"  Total predictions: {analytics['total_predictions']}")
+                print_info(f"  System accuracy: {analytics['system_accuracy']:.2%}")
+                return True
+            else:
+                print_error("Analytics returned success=False")
+                return False
+        else:
+            print_error(f"Analytics failed with status {response.status_code}")
+            return False
+    except Exception as e:
+        print_error(f"Analytics error: {str(e)}")
+        return False
