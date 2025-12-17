@@ -9,6 +9,7 @@ from io import BytesIO
 from PIL import Image, ImageDraw
 import numpy as np
 
-
+BASE_URL = "http://localhost:8000"
+TEST_USER_ID = 1
 
 
