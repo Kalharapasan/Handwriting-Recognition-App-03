@@ -235,3 +235,6 @@ def test_create_user():
     except Exception as e:
         print_error(f"User creation error: {str(e)}")
         return False
+
+def test_feedback():
+    print_info("Testing feedback submission...")
