@@ -132,8 +132,9 @@ def test_prediction_upload():
             else:
                 print_error("Upload prediction returned success=False")
                 return False
-        
-    
+        else:
+            print_error(f"Upload prediction failed with status {response.status_code}")
+            return False
     except Exception as e:
         print_error(f"Upload prediction error: {str(e)}")
         return False
