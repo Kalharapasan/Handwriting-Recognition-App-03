@@ -256,6 +256,29 @@ def test_feedback():
         
         pred_data = pred_response.json()
         prediction_id = pred_data['prediction_id']
+        
+        response = requests.post(
+            f"{BASE_URL}/api/feedback",
+            json={
+                "prediction_id": prediction_id,
+                "user_id": TEST_USER_ID,
+                "actual_digit": 3,
+                "confidence_rating": 5,
+                "comments": "Test feedback"
+            }
+        )
+        
+        if response.status_code == 200:
+            data = response.json()
+            if data['success']:
+                print_success("Feedback submitted successfully")
+                return True
+            else:
+                print_error("Feedback returned success=False")
+                return False
+        else:
+            print_error(f"Feedback failed with status {response.status_code}")
+            return False
     
     except Exception as e:
         print_error(f"Feedback error: {str(e)}")
