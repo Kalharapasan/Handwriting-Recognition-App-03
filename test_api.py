@@ -109,3 +109,7 @@ def test_prediction_base64():
 
 def test_prediction_upload():
     print_info("Testing prediction (file upload)...")
+    try:
+        img = create_test_digit_image(7)
+    
+    except Exception as e:
