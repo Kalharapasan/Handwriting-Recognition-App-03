@@ -41,3 +41,19 @@ def image_to_base64(img):
     img.save(buffer, format='PNG')
     img_bytes = buffer.getvalue()
     return base64.b64encode(img_bytes).decode()
+
+def test_health_check():
+    print_info("Testing health check...")
+    try:
+        response = requests.get(f"{BASE_URL}/health")
+        if response.status_code == 200:
+            data = response.json()
+            print_success(f"Health check passed - Status: {data['status']}")
+            print_info(f"  Model loaded: {data['model_loaded']}")
+            return True
+        else:
+            print_error(f"Health check failed with status {response.status_code}")
+            return False
+    except Exception as e:
+        print_error(f"Health check error: {str(e)}")
+        return False
