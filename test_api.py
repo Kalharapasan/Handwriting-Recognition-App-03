@@ -341,3 +341,18 @@ def run_all_tests():
     print("="*60 + "\n")
     
     return return_code
+
+if __name__ == "__main__":
+    print_info(f"Testing API at: {BASE_URL}")
+    print_info("Make sure the server is running before running tests\n")
+    
+    try:
+        response = requests.get(f"{BASE_URL}/health", timeout=5)
+        print_success("Server is reachable\n")
+    except requests.exceptions.ConnectionError:
+        print_error("Cannot connect to server!")
+        print_info("Please start the server with: python start_server.py")
+        sys.exit(1)
+    except Exception as e:
+        print_error(f"Error connecting to server: {str(e)}")
+        sys.exit(1)
