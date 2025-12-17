@@ -111,5 +111,10 @@ def test_prediction_upload():
     print_info("Testing prediction (file upload)...")
     try:
         img = create_test_digit_image(7)
+        buffer = BytesIO()
+        img.save(buffer, format='PNG')
+        buffer.seek(0)
     
     except Exception as e:
+        print_error(f"Upload prediction error: {str(e)}")
+        return False
