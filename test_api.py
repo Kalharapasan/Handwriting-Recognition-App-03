@@ -29,3 +29,7 @@ def print_info(message):
 
 def print_warning(message):
     print(f"{YELLOW}⚠ {message}{RESET}")
+    
+def create_test_digit_image(digit=5):
+    img = Image.new('L', (28, 28), color=255)
+    draw = ImageDraw.Draw(img)
