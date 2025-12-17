@@ -209,3 +209,29 @@ def test_prediction_history():
     except Exception as e:
         print_error(f"Prediction history error: {str(e)}")
         return False
+
+def test_create_user():
+    print_info("Testing user creation...")
+    try:
+        response = requests.post(
+            f"{BASE_URL}/api/users",
+            json={
+                "username": f"test_user_{int(time.time())}",
+                "email": f"test_{int(time.time())}@example.com"
+            }
+        )
+        
+        if response.status_code == 200:
+            data = response.json()
+            if data['success']:
+                print_success(f"User created with ID: {data['user_id']}")
+                return True
+            else:
+                print_error("User creation returned success=False")
+                return False
+        else:
+            print_error(f"User creation failed with status {response.status_code}")
+            return False
+    except Exception as e:
+        print_error(f"User creation error: {str(e)}")
+        return False
