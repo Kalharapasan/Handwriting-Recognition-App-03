@@ -74,3 +74,6 @@ def test_model_status():
     except Exception as e:
         print_error(f"Model status error: {str(e)}")
         return False
+
+def test_prediction_base64():
+    print_info("Testing prediction (base64)...")
