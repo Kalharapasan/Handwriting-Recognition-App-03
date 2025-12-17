@@ -188,3 +188,24 @@ def test_user_analytics():
     except Exception as e:
         print_error(f"User analytics error: {str(e)}")
         return False
+
+
+def test_prediction_history():
+    print_info("Testing prediction history...")
+    try:
+        response = requests.get(f"{BASE_URL}/api/analytics/predictions?limit=10")
+        
+        if response.status_code == 200:
+            data = response.json()
+            if data['success']:
+                print_success(f"Prediction history retrieved ({data['count']} records)")
+                return True
+            else:
+                print_error("Prediction history returned success=False")
+                return False
+        else:
+            print_error(f"Prediction history failed with status {response.status_code}")
+            return False
+    except Exception as e:
+        print_error(f"Prediction history error: {str(e)}")
+        return False
