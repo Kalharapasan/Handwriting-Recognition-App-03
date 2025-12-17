@@ -33,3 +33,5 @@ def print_warning(message):
 def create_test_digit_image(digit=5):
     img = Image.new('L', (28, 28), color=255)
     draw = ImageDraw.Draw(img)
+    draw.text((8, 4), str(digit), fill=0)
+    return img
