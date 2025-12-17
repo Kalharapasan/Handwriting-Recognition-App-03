@@ -285,4 +285,37 @@ def test_feedback():
         return False
 
 def run_all_tests():
+    print("\n" + "="*60)
+    print("  Handwriting Recognition API Test Suite")
+    print("="*60 + "\n")
+    tests = [
+        ("Health Check", test_health_check),
+        ("Model Status", test_model_status),
+        ("Prediction (Base64)", test_prediction_base64),
+        ("Prediction (Upload)", test_prediction_upload),
+        ("System Analytics", test_system_analytics),
+        ("User Analytics", test_user_analytics),
+        ("Prediction History", test_prediction_history),
+        ("User Creation", test_create_user),
+        ("Feedback Submission", test_feedback),
+    ]
     
+    results = {}
+    total_tests = len(tests)
+    passed_tests = 0
+    
+    for test_name, test_func in tests:
+        print(f"\n{'─'*60}")
+        print(f"Test: {test_name}")
+        print('─'*60)
+        
+        try:
+            result = test_func()
+            results[test_name] = result
+            if result:
+                passed_tests += 1
+        except Exception as e:
+            print_error(f"Test crashed: {str(e)}")
+            results[test_name] = False
+        
+        time.sleep(0.5)
