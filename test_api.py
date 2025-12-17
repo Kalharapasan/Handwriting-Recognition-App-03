@@ -162,3 +162,29 @@ def test_system_analytics():
     except Exception as e:
         print_error(f"Analytics error: {str(e)}")
         return False
+
+def test_user_analytics():
+    print_info("Testing user analytics...")
+    try:
+        response = requests.get(f"{BASE_URL}/api/analytics/user/{TEST_USER_ID}")
+        
+        if response.status_code == 200:
+            data = response.json()
+            if data['success']:
+                print_success("User analytics retrieved")
+                stats = data['data']
+                if stats:
+                    print_info(f"  Total predictions: {stats['total_predictions']}")
+                    print_info(f"  User accuracy: {stats['user_accuracy']:.2%}")
+                else:
+                    print_info("  No data for user yet (expected for new user)")
+                return True
+            else:
+                print_warning("No analytics data for user (may be expected)")
+                return True
+        else:
+            print_error(f"User analytics failed with status {response.status_code}")
+            return False
+    except Exception as e:
+        print_error(f"User analytics error: {str(e)}")
+        return False
