@@ -106,3 +106,6 @@ def test_prediction_base64():
     except Exception as e:
         print_error(f"Prediction error: {str(e)}")
         return False
+
+def test_prediction_upload():
+    print_info("Testing prediction (file upload)...")
