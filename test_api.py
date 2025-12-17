@@ -80,5 +80,28 @@ def test_prediction_base64():
     try:
         img = create_test_digit_image(5)
         img_base64 = image_to_base64(img)
+        response = requests.post(
+            f"{BASE_URL}/api/predict",
+            json={
+                "image_data": f"data:image/png;base64,{img_base64}",
+                "user_id": TEST_USER_ID,
+                "enhancement_level": 1.0
+            }
+        )
+        
+        if response.status_code == 200:
+            data = response.json()
+            if data['success']:
+                print_success(f"Prediction successful")
+                print_info(f"  Predicted digit: {data['predicted_digit']}")
+                print_info(f"  Confidence: {data['confidence']:.2%}")
+                print_info(f"  Processing time: {data['processing_time']:.3f}s")
+                return True
+            else:
+                print_error("Prediction returned success=False")
+                return False
+        else:
+            print_error(f"Prediction failed with status {response.status_code}")
+            return False
         
     except Exception as e:
