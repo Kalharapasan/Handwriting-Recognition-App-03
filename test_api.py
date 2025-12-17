@@ -319,3 +319,25 @@ def run_all_tests():
             results[test_name] = False
         
         time.sleep(0.5)
+    
+    print("\n" + "="*60)
+    print("  Test Summary")
+    print("="*60)
+    
+    for test_name, result in results.items():
+        status = f"{GREEN}PASSED{RESET}" if result else f"{RED}FAILED{RESET}"
+        print(f"  {test_name}: {status}")
+    
+    print("\n" + "─"*60)
+    print(f"  Total: {passed_tests}/{total_tests} tests passed")
+    
+    if passed_tests == total_tests:
+        print(f"{GREEN}  All tests passed! ✓{RESET}")
+        return_code = 0
+    else:
+        print(f"{RED}  Some tests failed! ✗{RESET}")
+        return_code = 1
+    
+    print("="*60 + "\n")
+    
+    return return_code
