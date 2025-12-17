@@ -12,4 +12,9 @@ import numpy as np
 BASE_URL = "http://localhost:8000"
 TEST_USER_ID = 1
 
+GREEN = '\033[92m'
+RED = '\033[91m'
+YELLOW = '\033[93m'
+BLUE = '\033[94m'
+RESET = '\033[0m'
 
