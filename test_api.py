@@ -57,3 +57,20 @@ def test_health_check():
     except Exception as e:
         print_error(f"Health check error: {str(e)}")
         return False
+
+def test_model_status():
+    print_info("Testing model status...")
+    try:
+        response = requests.get(f"{BASE_URL}/api/model/status")
+        if response.status_code == 200:
+            data = response.json()
+            print_success(f"Model status retrieved")
+            print_info(f"  Model loaded: {data['model_loaded']}")
+            print_info(f"  Model version: {data['model_version']}")
+            return True
+        else:
+            print_error(f"Model status failed with status {response.status_code}")
+            return False
+    except Exception as e:
+        print_error(f"Model status error: {str(e)}")
+        return False
