@@ -18,3 +18,14 @@ YELLOW = '\033[93m'
 BLUE = '\033[94m'
 RESET = '\033[0m'
 
+def print_success(message):
+    print(f"{GREEN}✓ {message}{RESET}")
+
+def print_error(message):
+    print(f"{RED}✗ {message}{RESET}")
+
+def print_info(message):
+    print(f"{BLUE}ℹ {message}{RESET}")
+
+def print_warning(message):
+    print(f"{YELLOW}⚠ {message}{RESET}")
