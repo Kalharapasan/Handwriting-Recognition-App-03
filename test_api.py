@@ -116,6 +116,23 @@ def test_prediction_upload():
         buffer.seek(0)
         files = {'file': ('test_digit.png', buffer, 'image/png')}
         data = {'user_id': TEST_USER_ID}
+        response = requests.post(
+            f"{BASE_URL}/api/predict-upload",
+            files=files,
+            data=data
+        )
+        
+        if response.status_code == 200:
+            result = response.json()
+            if result['success']:
+                print_success(f"Upload prediction successful")
+                print_info(f"  Predicted digit: {result['predicted_digit']}")
+                print_info(f"  Confidence: {result['confidence']:.2%}")
+                return True
+            else:
+                print_error("Upload prediction returned success=False")
+                return False
+        
     
     except Exception as e:
         print_error(f"Upload prediction error: {str(e)}")
