@@ -283,3 +283,6 @@ def test_feedback():
     except Exception as e:
         print_error(f"Feedback error: {str(e)}")
         return False
+
+def run_all_tests():
+    
