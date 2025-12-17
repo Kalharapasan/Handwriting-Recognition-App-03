@@ -35,3 +35,9 @@ def create_test_digit_image(digit=5):
     draw = ImageDraw.Draw(img)
     draw.text((8, 4), str(digit), fill=0)
     return img
+
+def image_to_base64(img):
+    buffer = BytesIO()
+    img.save(buffer, format='PNG')
+    img_bytes = buffer.getvalue()
+    return base64.b64encode(img_bytes).decode()
