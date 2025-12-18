@@ -462,5 +462,11 @@ async def startup_event():
     config.create_directories()
     os.makedirs("templates", exist_ok=True)
     os.makedirs("data/exports", exist_ok=True)
+    if model_manager.model is None:
+        logger.warning("No model loaded. Please train a model or provide a pre-trained model.")
+    else:
+        logger.info(f"Model loaded successfully: {model_manager.model_version}")
+    
+    logger.info("API ready to accept requests")
     
     
