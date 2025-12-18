@@ -431,3 +431,8 @@ async def export_user_data(user_id: int, format: str = "json"):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+def save_prediction_image(image_np):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    os.makedirs("data/uploaded/images", exist_ok=True)
+    
+    file_path = f"data/uploaded/images/pred_{timestamp}.png"
