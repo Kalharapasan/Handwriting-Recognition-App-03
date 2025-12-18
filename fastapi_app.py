@@ -209,17 +209,17 @@ async def predict_batch(files: List[UploadFile] = File(...), user_id: int = Form
         processed_image, processing_time = image_preprocessor.preprocess_image(
                 image_np,
                 target_size=(28, 28)
-            )
+        )
 
         processed_image = processed_image.reshape(1, 28, 28, 1)
         predicted_digit, confidence, _ = model_manager.predict_digit(processed_image)
             
-            results.append({
-                "filename": file.filename,
-                "predicted_digit": int(predicted_digit),
-                "confidence": float(confidence),
-                "processing_time": processing_time
-            })
+        results.append({
+            "filename": file.filename,
+            "predicted_digit": int(predicted_digit),
+            "confidence": float(confidence),
+            "processing_time": processing_time
+        })
         
         return {
             "success": True,
