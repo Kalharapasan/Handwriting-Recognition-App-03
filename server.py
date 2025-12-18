@@ -101,3 +101,23 @@ def check_templates():
     else:
         logger.warning(f" Template not found at {template_path}")
         logger.info("Creating basic template...")
+        
+    os.makedirs('templates', exist_ok=True)
+    with open(template_path, 'w') as f:
+            f.write("""
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Handwriting Recognition System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Handwriting Recognition System</h1>
+    <p>The system is running. Access the API documentation at <a href="/docs">/docs</a></p>
+</body>
+</html>
+            """)
+        
+    logger.info(" Basic template created")
+    return True
