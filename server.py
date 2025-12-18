@@ -78,3 +78,14 @@ def check_model():
         logger.info("You can train a model using the /api/train endpoint or by running:")
         logger.info(" python model_trainer.py")
         return True 
+
+def initialize_database():
+    logger.info("Initializing database...")
+    
+    try:
+        from database import db_manager
+        logger.info(" Database initialized successfully")
+        return True
+    except Exception as e:
+        logger.error(f" Database initialization failed: {str(e)}")
+        return False
