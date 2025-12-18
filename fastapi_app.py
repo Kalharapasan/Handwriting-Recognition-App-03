@@ -91,7 +91,6 @@ async def dashboard():
 
 @app.get("/health")
 async def health_check():
-    """Health check endpoint"""
     return {
         "status": "healthy",
         "model_loaded": model_manager.model is not None,
