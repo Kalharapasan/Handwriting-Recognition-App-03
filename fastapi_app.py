@@ -320,3 +320,5 @@ async def get_prediction_history(limit: int = 100, user_id: Optional[int] = None
     except Exception as e:
         logger.error(f"Prediction history error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
