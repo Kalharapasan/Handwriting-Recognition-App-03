@@ -119,6 +119,32 @@ async def predict_digit(request: PredictionRequest):
             return_all=True
         )
         
+        image_path = save_prediction_image(image_np)
+        prediction_id = db_manager.add_prediction(
+            user_id=request.user_id,
+            predicted_digit=int(predicted_digit),
+            confidence=float(confidence),
+            image_path=image_path,
+            user_input_type="drawing",
+            file_name="drawing.png",
+            processing_time=processing_time,
+            image_size=f"{image_np.shape[0]}x{image_np.shape[1]}",
+            model_version=model_manager.model_version
+        )
+        
+        total_time = time.time() - start_time
+        
+        return {
+            "success": True,
+            "prediction_id": prediction_id,
+            "predicted_digit": int(predicted_digit),
+            "confidence": float(confidence),
+            "all_predictions": result['all_predictions'].tolist() if result['all_predictions'] is not None else None,
+            "processing_time": processing_time,
+            "total_time": total_time,
+            "timestamp": datetime.now().isoformat()
+        }
+        
     
     except Exception as e:
         logger.error(f"Prediction error: {str(e)}")
