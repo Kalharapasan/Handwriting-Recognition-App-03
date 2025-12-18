@@ -64,3 +64,19 @@ class TrainingConfig(BaseModel):
     epochs: int = 50
     batch_size: int = 32
     
+@app.get("/", response_class=HTMLResponse)
+async def root():
+    try:
+        with open("/home/claude/templates/index.html", "r") as f:
+            return f.read()
+    except FileNotFoundError:
+        return """
+        <html>
+            <head><title>HWR System</title></head>
+            <body>
+                <h1>Handwriting Recognition System</h1>
+                <p>Loading interface...</p>
+                <script>window.location.href = '/dashboard';</script>
+            </body>
+        </html>
+        """
