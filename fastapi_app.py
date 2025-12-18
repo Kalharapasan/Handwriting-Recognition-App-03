@@ -38,3 +38,6 @@ app.add_middleware(
 
 os.makedirs("static", exist_ok=True)
 app.mount("/static", StaticFiles(directory="static"), name="static")
+image_preprocessor = AdvancedImagePreprocessor()
+model_manager = AdvancedModelManager(config.MODEL_PATH)
+ocr_processor = OCRProcessor()
