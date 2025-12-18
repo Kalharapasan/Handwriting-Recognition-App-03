@@ -186,3 +186,6 @@ def main():
         port=args.port,
         reload=not args.no_reload
     )
+    
+if __name__ == "__main__":
+    main()
