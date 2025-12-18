@@ -391,3 +391,12 @@ async def train_model(config_data: TrainingConfig):
     except Exception as e:
         logger.error(f"Training error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/model/status")
+async def get_model_status():
+    return {
+        "success": True,
+        "model_loaded": model_manager.model is not None,
+        "model_version": model_manager.model_version,
+        "model_path": config.MODEL_PATH
+    }
