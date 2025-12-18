@@ -378,6 +378,15 @@ async def train_model(config_data: TrainingConfig):
         )
         (x_train, y_train), (x_test, y_test) = trainer.load_data(use_augmentation=False)
         results = trainer.evaluate_model(x_test, y_test)
+        model_manager.load_model(config.MODEL_PATH)
+        
+        return {
+            "success": True,
+            "test_accuracy": float(results['test_accuracy']),
+            "test_loss": float(results['test_loss']),
+            "training_time": float(trainer.training_time),
+            "message": "Model trained successfully"
+        }
     
     except Exception as e:
         logger.error(f"Training error: {str(e)}")
