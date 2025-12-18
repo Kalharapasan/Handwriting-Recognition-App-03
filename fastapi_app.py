@@ -456,3 +456,8 @@ def save_uploaded_file(file: UploadFile, contents: bytes):
     
     return file_path
 
+@app.on_event("startup")
+async def startup_event():
+    logger.info("Starting Handwriting Recognition API...")
+    
+    
