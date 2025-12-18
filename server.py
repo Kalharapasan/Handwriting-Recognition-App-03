@@ -89,3 +89,15 @@ def initialize_database():
     except Exception as e:
         logger.error(f" Database initialization failed: {str(e)}")
         return False
+
+def check_templates():
+    logger.info("Checking templates...")
+    
+    template_path = 'templates/index.html'
+    
+    if os.path.exists(template_path):
+        logger.info(" Templates found")
+        return True
+    else:
+        logger.warning(f" Template not found at {template_path}")
+        logger.info("Creating basic template...")
