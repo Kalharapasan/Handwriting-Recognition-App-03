@@ -153,6 +153,10 @@ async def predict_digit(request: PredictionRequest):
 @app.post("/api/predict-upload")
 async def predict_from_upload(file: UploadFile = File(...),user_id: int = Form(1),enhancement_level: float = Form(1.0)):
     try:
+        
+        contents = await file.read()
+        image = Image.open(io.BytesIO(contents))
+        image_np = np.array(image)
     
     
     except Exception as e:
