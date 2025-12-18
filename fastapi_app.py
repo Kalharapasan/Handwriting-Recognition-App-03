@@ -206,6 +206,11 @@ async def predict_batch(files: List[UploadFile] = File(...), user_id: int = Form
             image = Image.open(io.BytesIO(contents))
             image_np = np.array(image)
         
+        processed_image, processing_time = image_preprocessor.preprocess_image(
+                image_np,
+                target_size=(28, 28)
+            )
+        
     except Exception as e:
         logger.error(f"Batch prediction error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
