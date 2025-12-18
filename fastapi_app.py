@@ -376,6 +376,8 @@ async def train_model(config_data: TrainingConfig):
         history = trainer.train_model(
             use_hyperparameter_tuning=config_data.use_hyperparameter_tuning
         )
+        (x_train, y_train), (x_test, y_test) = trainer.load_data(use_augmentation=False)
+        results = trainer.evaluate_model(x_test, y_test)
     
     except Exception as e:
         logger.error(f"Training error: {str(e)}")
