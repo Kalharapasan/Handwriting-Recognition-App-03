@@ -252,3 +252,16 @@ async def add_feedback(feedback: FeedbackRequest):
     except Exception as e:
         logger.error(f"Feedback error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/analytics/system")
+async def get_system_analytics():
+    """Get system-wide analytics"""
+    try:
+        analytics = db_manager.get_system_analytics()
+        return {
+            "success": True,
+            "data": analytics
+        }
+    except Exception as e:
+        logger.error(f"Analytics error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
