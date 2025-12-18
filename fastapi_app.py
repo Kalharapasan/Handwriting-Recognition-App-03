@@ -170,6 +170,28 @@ async def predict_from_upload(file: UploadFile = File(...),user_id: int = Form(1
             processed_image,
             return_all=True
         )
+        image_path = save_uploaded_file(file, contents)
+        prediction_id = db_manager.add_prediction(
+            user_id=user_id,
+            predicted_digit=int(predicted_digit),
+            confidence=float(confidence),
+            image_path=image_path,
+            user_input_type="upload",
+            file_name=file.filename,
+            processing_time=processing_time,
+            image_size=f"{image_np.shape[0]}x{image_np.shape[1]}",
+            model_version=model_manager.model_version
+        )
+        
+        return {
+            "success": True,
+            "prediction_id": prediction_id,
+            "predicted_digit": int(predicted_digit),
+            "confidence": float(confidence),
+            "all_predictions": result['all_predictions'].tolist() if result['all_predictions'] is not None else None,
+            "filename": file.filename,
+            "processing_time": processing_time
+        }
     
     
     except Exception as e:
