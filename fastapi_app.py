@@ -63,3 +63,4 @@ class TrainingConfig(BaseModel):
     use_augmentation: bool = True
     epochs: int = 50
     batch_size: int = 32
+    
