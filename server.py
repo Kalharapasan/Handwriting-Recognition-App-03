@@ -64,3 +64,17 @@ def check_directories():
     
     logger.info("All directories are ready")
     return True
+
+def check_model():
+    logger.info("Checking for trained model...")
+    
+    model_path = 'models/handwriting_model.h5'
+    
+    if os.path.exists(model_path):
+        logger.info(f" Model found at {model_path}")
+        return True
+    else:
+        logger.warning(f"⚠ No model found at {model_path}")
+        logger.info("You can train a model using the /api/train endpoint or by running:")
+        logger.info(" python model_trainer.py")
+        return True 
