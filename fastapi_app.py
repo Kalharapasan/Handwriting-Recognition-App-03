@@ -199,6 +199,12 @@ async def predict_from_upload(file: UploadFile = File(...),user_id: int = Form(1
 @app.post("/api/predict-batch")
 async def predict_batch(files: List[UploadFile] = File(...), user_id: int = Form(1)):
     try:
+        results = []
+        
+        for file in files:
+            contents = await file.read()
+            image = Image.open(io.BytesIO(contents))
+            image_np = np.array(image)
         
     except Exception as e:
         logger.error(f"Batch prediction error: {str(e)}")
