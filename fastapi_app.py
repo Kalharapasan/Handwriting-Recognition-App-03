@@ -165,6 +165,11 @@ async def predict_from_upload(file: UploadFile = File(...),user_id: int = Form(1
         )
         
         processed_image = processed_image.reshape(1, 28, 28, 1)
+        
+        predicted_digit, confidence, result = model_manager.predict_digit(
+            processed_image,
+            return_all=True
+        )
     
     
     except Exception as e:
