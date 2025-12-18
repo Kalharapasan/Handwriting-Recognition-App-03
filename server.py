@@ -121,3 +121,31 @@ def check_templates():
         
     logger.info(" Basic template created")
     return True
+
+def run_server(host='0.0.0.0', port=8000, reload=True):
+    logger.info(f"Starting FastAPI server on {host}:{port}")
+    logger.info(f"Reload mode: {reload}")
+    logger.info("-" * 60)
+    logger.info(f"Application will be available at:")
+    logger.info(f"  - Local:   http://localhost:{port}")
+    logger.info(f"  - Network: http://{host}:{port}")
+    logger.info(f"  - API Docs: http://localhost:{port}/docs")
+    logger.info(f"  - ReDoc:    http://localhost:{port}/redoc")
+    logger.info("-" * 60)
+    
+    try:
+        import uvicorn
+        from fastapi_app import app
+        
+        uvicorn.run(
+            "fastapi_app:app",
+            host=host,
+            port=port,
+            reload=reload,
+            log_level="info"
+        )
+    except KeyboardInterrupt:
+        logger.info("\nServer stopped by user")
+    except Exception as e:
+        logger.error(f"Server error: {str(e)}")
+        sys.exit(1)
