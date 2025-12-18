@@ -157,6 +157,12 @@ async def predict_from_upload(file: UploadFile = File(...),user_id: int = Form(1
         contents = await file.read()
         image = Image.open(io.BytesIO(contents))
         image_np = np.array(image)
+        
+        processed_image, processing_time = image_preprocessor.preprocess_image(
+            image_np,
+            target_size=(28, 28),
+            enhancement_level=enhancement_level
+        )
     
     
     except Exception as e:
