@@ -231,3 +231,24 @@ async def predict_batch(files: List[UploadFile] = File(...), user_id: int = Form
     except Exception as e:
         logger.error(f"Batch prediction error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/feedback")
+async def add_feedback(feedback: FeedbackRequest):
+    try:
+        db_manager.add_feedback(
+            prediction_id=feedback.prediction_id,
+            user_id=feedback.user_id,
+            actual_digit=feedback.actual_digit,
+            correct_prediction=(feedback.actual_digit == feedback.prediction_id),
+            confidence_rating=feedback.confidence_rating,
+            comments=feedback.comments
+        )
+        
+        return {
+            "success": True,
+            "message": "Feedback recorded successfully"
+        }
+        
+    except Exception as e:
+        logger.error(f"Feedback error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
