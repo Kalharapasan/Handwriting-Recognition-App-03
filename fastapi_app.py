@@ -372,7 +372,8 @@ async def train_model(config_data: TrainingConfig):
     try:
         config.EPOCHS = config_data.epochs
         config.BATCH_SIZE = config_data.batch_size
+        trainer = AdvancedModelTrainer()
     
     except Exception as e:
         logger.error(f"Training error: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e)
+        raise HTTPException(status_code=500, detail=str(e))
