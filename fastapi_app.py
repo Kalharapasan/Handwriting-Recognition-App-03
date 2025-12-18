@@ -459,5 +459,8 @@ def save_uploaded_file(file: UploadFile, contents: bytes):
 @app.on_event("startup")
 async def startup_event():
     logger.info("Starting Handwriting Recognition API...")
+    config.create_directories()
+    os.makedirs("templates", exist_ok=True)
+    os.makedirs("data/exports", exist_ok=True)
     
     
