@@ -367,3 +367,10 @@ async def get_user(user_id: int):
         logger.error(f"Get user error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/api/train")
+async def train_model(config_data: TrainingConfig):
+    try:
+    
+    except Exception as e:
+        logger.error(f"Training error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e)
