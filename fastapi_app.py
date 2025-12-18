@@ -436,3 +436,10 @@ def save_prediction_image(image_np):
     os.makedirs("data/uploaded/images", exist_ok=True)
     
     file_path = f"data/uploaded/images/pred_{timestamp}.png"
+    if len(image_np.shape) == 2:
+        img = Image.fromarray(image_np.astype('uint8'))
+    else:
+        img = Image.fromarray(image_np.astype('uint8'))
+    
+    img.save(file_path)
+    return file_path
