@@ -113,6 +113,7 @@ async def predict_digit(request: PredictionRequest):
         )
         
         processed_image = processed_image.reshape(1, 28, 28, 1)
+        
     
     except Exception as e:
         logger.error(f"Prediction error: {str(e)}")
