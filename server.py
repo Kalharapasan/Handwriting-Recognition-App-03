@@ -173,3 +173,11 @@ def main():
             sys.exit(1)
     
     logger.info("\n All checks passed! Starting server...\n")
+    
+    import argparse
+    parser = argparse.ArgumentParser(description='Start the Handwriting Recognition API')
+    parser.add_argument('--host', default='0.0.0.0', help='Host to bind to')
+    parser.add_argument('--port', type=int, default=8000, help='Port to bind to')
+    parser.add_argument('--no-reload', action='store_true', help='Disable auto-reload')
+    
+    args = parser.parse_args()
