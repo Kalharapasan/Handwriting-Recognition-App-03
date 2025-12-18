@@ -97,3 +97,7 @@ async def health_check():
         "database_connected": True,
         "timestamp": datetime.now().isoformat()
     }
+
+@app.post("/api/predict")
+async def predict_digit(request: PredictionRequest):
+    
