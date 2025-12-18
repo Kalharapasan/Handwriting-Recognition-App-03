@@ -400,3 +400,4 @@ async def get_model_status():
         "model_version": model_manager.model_version,
         "model_path": config.MODEL_PATH
     }
+
