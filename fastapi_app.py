@@ -46,3 +46,14 @@ class PredictionRequest(BaseModel):
     image_data: str 
     user_id: int = 1
     enhancement_level: float = 1.0
+    
+class FeedbackRequest(BaseModel):
+    prediction_id: int
+    user_id: int
+    actual_digit: int
+    confidence_rating: Optional[int] = None
+    comments: Optional[str] = ""
+
+class UserCreate(BaseModel):
+    username: str
+    email: Optional[str] = None
