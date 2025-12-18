@@ -21,3 +21,9 @@ from config import config
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+app = FastAPI(
+    title="Advanced Handwriting Recognition API",
+    description="AI-powered handwriting recognition system with FastAPI",
+    version="2.0.0"
+)
