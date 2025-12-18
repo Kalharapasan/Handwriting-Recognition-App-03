@@ -80,3 +80,11 @@ async def root():
             </body>
         </html>
         """
+
+@app.get("/dashboard", response_class=HTMLResponse)
+async def dashboard():
+    try:
+        with open("/home/claude/templates/dashboard.html", "r") as f:
+            return f.read()
+    except FileNotFoundError:
+        return HTMLResponse(content="<h1>Dashboard loading...</h1>")
