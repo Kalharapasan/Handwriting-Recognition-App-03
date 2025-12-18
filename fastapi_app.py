@@ -470,3 +470,6 @@ async def startup_event():
     logger.info("API ready to accept requests")
     
     
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
