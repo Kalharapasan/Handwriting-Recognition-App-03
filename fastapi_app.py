@@ -57,3 +57,9 @@ class FeedbackRequest(BaseModel):
 class UserCreate(BaseModel):
     username: str
     email: Optional[str] = None
+
+class TrainingConfig(BaseModel):
+    use_hyperparameter_tuning: bool = False
+    use_augmentation: bool = True
+    epochs: int = 50
+    batch_size: int = 32
