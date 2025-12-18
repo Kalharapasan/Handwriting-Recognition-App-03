@@ -370,6 +370,8 @@ async def get_user(user_id: int):
 @app.post("/api/train")
 async def train_model(config_data: TrainingConfig):
     try:
+        config.EPOCHS = config_data.epochs
+        config.BATCH_SIZE = config_data.batch_size
     
     except Exception as e:
         logger.error(f"Training error: {str(e)}")
