@@ -41,3 +41,8 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 image_preprocessor = AdvancedImagePreprocessor()
 model_manager = AdvancedModelManager(config.MODEL_PATH)
 ocr_processor = OCRProcessor()
+
+class PredictionRequest(BaseModel):
+    image_data: str 
+    user_id: int = 1
+    enhancement_level: float = 1.0
