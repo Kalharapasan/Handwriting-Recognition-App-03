@@ -373,6 +373,9 @@ async def train_model(config_data: TrainingConfig):
         config.EPOCHS = config_data.epochs
         config.BATCH_SIZE = config_data.batch_size
         trainer = AdvancedModelTrainer()
+        history = trainer.train_model(
+            use_hyperparameter_tuning=config_data.use_hyperparameter_tuning
+        )
     
     except Exception as e:
         logger.error(f"Training error: {str(e)}")
