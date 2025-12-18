@@ -105,6 +105,12 @@ async def predict_digit(request: PredictionRequest):
         image_data = base64.b64decode(request.image_data.split(',')[1] if ',' in request.image_data else request.image_data)
         image = Image.open(io.BytesIO(image_data))
         image_np = np.array(image)
+        
+        processed_image, processing_time = image_preprocessor.preprocess_image(
+            image_np, 
+            target_size=(28, 28),
+            enhancement_level=request.enhancement_level
+        )
     
     except Exception as e:
         logger.error(f"Prediction error: {str(e)}")
