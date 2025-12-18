@@ -339,3 +339,30 @@ async def create_user(user: UserCreate):
     except Exception as e:
         logger.error(f"User creation error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/users/{user_id}")
+async def get_user(user_id: int):
+    try:
+        from database import User
+        user = db_manager.session.query(User).filter(User.id == user_id).first()
+        
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        return {
+            "success": True,
+            "data": {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+                "created_at": user.created_at.isoformat(),
+                "is_active": user.is_active
+            }
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Get user error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
