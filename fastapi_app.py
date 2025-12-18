@@ -443,3 +443,15 @@ def save_prediction_image(image_np):
     
     img.save(file_path)
     return file_path
+
+def save_uploaded_file(file: UploadFile, contents: bytes):
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    os.makedirs("data/uploaded/images", exist_ok=True)
+    
+    file_ext = file.filename.split('.')[-1] if '.' in file.filename else 'png'
+    file_path = f"data/uploaded/images/upload_{timestamp}.{file_ext}"
+    
+    with open(file_path, "wb") as f:
+        f.write(contents)
+    
+    return file_path
