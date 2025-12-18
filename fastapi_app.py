@@ -100,4 +100,13 @@ async def health_check():
 
 @app.post("/api/predict")
 async def predict_digit(request: PredictionRequest):
+    try:
+        start_time = time.time()
+        image_data = base64.b64decode(request.image_data.split(',')[1] if ',' in request.image_data else request.image_data)
+        image = Image.open(io.BytesIO(image_data))
+        image_np = np.array(image)
+    
+    except Exception as e:
+        logger.error(f"Prediction error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
     
