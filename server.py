@@ -181,3 +181,8 @@ def main():
     parser.add_argument('--no-reload', action='store_true', help='Disable auto-reload')
     
     args = parser.parse_args()
+    run_server(
+        host=args.host,
+        port=args.port,
+        reload=not args.no_reload
+    )
