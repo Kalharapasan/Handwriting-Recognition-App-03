@@ -157,3 +157,19 @@ def main():
     ║                  Starting Application...                  ║
     ╚══════════════════════════════════════════════════════════╝
     """)
+    
+    checks = [
+        ("Dependencies", check_dependencies),
+        ("Directories", check_directories),
+        ("Templates", check_templates),
+        ("Database", initialize_database),
+        ("Model", check_model),
+    ]
+    
+    for check_name, check_func in checks:
+        if not check_func():
+            logger.error(f" {check_name} check failed")
+            logger.info("Please fix the above issues and try again")
+            sys.exit(1)
+    
+    logger.info("\n All checks passed! Starting server...\n")
