@@ -264,3 +264,24 @@ async def get_system_analytics():
     except Exception as e:
         logger.error(f"Analytics error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/analytics/user/{user_id}")
+async def get_user_analytics(user_id: int):
+    try:
+        stats = db_manager.get_user_stats(user_id)
+        
+        if stats is None:
+            return {
+                "success": False,
+                "message": "No data found for user"
+            }
+        
+        return {
+            "success": True,
+            "data": stats
+        }
+        
+    except Exception as e:
+        logger.error(f"User analytics error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
