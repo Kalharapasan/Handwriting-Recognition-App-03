@@ -196,6 +196,7 @@ async def predict_from_upload(file: UploadFile = File(...),user_id: int = Form(1
         logger.error(f"Upload prediction error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.post("/api/predict-batch")
 async def predict_batch(files: List[UploadFile] = File(...), user_id: int = Form(1)):
     try:
