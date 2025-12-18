@@ -401,3 +401,31 @@ async def get_model_status():
         "model_path": config.MODEL_PATH
     }
 
+@app.get("/api/export/user/{user_id}")
+async def export_user_data(user_id: int, format: str = "json"):
+    try:
+        if format == "csv":
+            pred_df, feedback_df = db_manager.export_user_data(user_id, format='csv')
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            pred_file = f"data/exports/predictions_{user_id}_{timestamp}.csv"
+            feedback_file = f"data/exports/feedback_{user_id}_{timestamp}.csv"
+            
+            os.makedirs("data/exports", exist_ok=True)
+            pred_df.to_csv(pred_file, index=False)
+            feedback_df.to_csv(feedback_file, index=False)
+            
+            return {
+                "success": True,
+                "predictions_file": pred_file,
+                "feedback_file": feedback_file
+            }
+        else:
+            data = db_manager.export_user_data(user_id, format='json')
+            return {
+                "success": True,
+                "data": data
+            }
+            
+    except Exception as e:
+        logger.error(f"Export error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
