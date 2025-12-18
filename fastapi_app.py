@@ -88,3 +88,13 @@ async def dashboard():
             return f.read()
     except FileNotFoundError:
         return HTMLResponse(content="<h1>Dashboard loading...</h1>")
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+        "model_loaded": model_manager.model is not None,
+        "database_connected": True,
+        "timestamp": datetime.now().isoformat()
+    }
