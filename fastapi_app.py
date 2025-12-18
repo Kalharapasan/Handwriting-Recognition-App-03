@@ -114,6 +114,11 @@ async def predict_digit(request: PredictionRequest):
         
         processed_image = processed_image.reshape(1, 28, 28, 1)
         
+        predicted_digit, confidence, result = model_manager.predict_digit(
+            processed_image, 
+            return_all=True
+        )
+        
     
     except Exception as e:
         logger.error(f"Prediction error: {str(e)}")
