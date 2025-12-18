@@ -366,3 +366,4 @@ async def get_user(user_id: int):
     except Exception as e:
         logger.error(f"Get user error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
