@@ -152,5 +152,9 @@ async def predict_digit(request: PredictionRequest):
     
 @app.post("/api/predict-upload")
 async def predict_from_upload(file: UploadFile = File(...),user_id: int = Form(1),enhancement_level: float = Form(1.0)):
+    try:
     
     
+    except Exception as e:
+        logger.error(f"Upload prediction error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
