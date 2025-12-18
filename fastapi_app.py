@@ -163,6 +163,8 @@ async def predict_from_upload(file: UploadFile = File(...),user_id: int = Form(1
             target_size=(28, 28),
             enhancement_level=enhancement_level
         )
+        
+        processed_image = processed_image.reshape(1, 28, 28, 1)
     
     
     except Exception as e:
