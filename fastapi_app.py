@@ -285,3 +285,38 @@ async def get_user_analytics(user_id: int):
     except Exception as e:
         logger.error(f"User analytics error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/analytics/predictions")
+async def get_prediction_history(limit: int = 100, user_id: Optional[int] = None):
+    try:
+        from sqlalchemy import desc
+        from database import PredictionHistory
+        
+        query = db_manager.session.query(PredictionHistory)
+        
+        if user_id:
+            query = query.filter(PredictionHistory.user_id == user_id)
+        
+        predictions = query.order_by(desc(PredictionHistory.timestamp)).limit(limit).all()
+        
+        results = []
+        for pred in predictions:
+            results.append({
+                "id": pred.id,
+                "timestamp": pred.timestamp.isoformat(),
+                "predicted_digit": pred.predicted_digit,
+                "confidence": pred.confidence,
+                "user_input_type": pred.user_input_type,
+                "processing_time": pred.processing_time
+            })
+        
+        return {
+            "success": True,
+            "count": len(results),
+            "data": results
+        }
+        
+    except Exception as e:
+        logger.error(f"Prediction history error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
