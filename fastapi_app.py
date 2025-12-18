@@ -322,3 +322,20 @@ async def get_prediction_history(limit: int = 100, user_id: Optional[int] = None
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post("/api/users")
+async def create_user(user: UserCreate):
+    try:
+        user_id = db_manager.add_user(
+            username=user.username,
+            email=user.email
+        )
+        
+        return {
+            "success": True,
+            "user_id": user_id,
+            "message": "User created successfully"
+        }
+        
+    except Exception as e:
+        logger.error(f"User creation error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
