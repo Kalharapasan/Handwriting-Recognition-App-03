@@ -45,8 +45,8 @@ All dependencies are listed in `requirements_fastapi.txt`
 ### 1. Clone or Download the Project
 ```bash
 # If using git
-git clone <repository-url>
-cd handwriting-recognition-fastapi
+git clone https://github.com/Kalharapasan/Handwriting-Recognition-App-03.git
+cd Handwriting-Recognition-App-03
 
 # Or extract the uploaded files to a directory
 ```
@@ -65,7 +65,7 @@ source venv/bin/activate
 
 ### 3. Install Dependencies
 ```bash
-pip install -r requirements_fastapi.txt
+pip install -r requirements.txt
 ```
 
 ### 4. Initialize Database
