@@ -499,6 +499,13 @@
             ctx.beginPath();
             ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
         }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+            ctx.stroke();
+        }
     
     </script>
 
