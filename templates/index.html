@@ -47,6 +47,18 @@
                     <div id="drawingResult"></div>
                 </div>
             </div>
+
+            <div id="upload" class="tab-content">
+                <div class="file-upload-container" id="dropZone">
+                    <h2>📁 Upload Image</h2>
+                    <p style="margin: 20px 0; color: var(--text-light);">Drag and drop an image here or click to browse</p>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Choose File</button>
+                    
+                    <div id="uploadPreview" style="margin-top: 20px;"></div>
+                    <div id="uploadResult"></div>
+                </div>
+            </div>
             
 
         </div>
