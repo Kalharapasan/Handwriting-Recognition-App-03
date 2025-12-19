@@ -237,9 +237,7 @@ class DataAugmentor:
         augmentations = {
             'rotation': DataAugmentor.rotate_image,
             'translation': DataAugmentor.translate_image,
-            'scaling': DataAugmentor.scale_image,
-            'elastic': DataAugmentor.elastic_transform,
-            'noise': DataAugmentor.add_noise
+            'elastic': DataAugmentor.elastic_transform
         }
         if augmentation_type == 'all':
             aug_type = np.random.choice(list(augmentations.keys()))

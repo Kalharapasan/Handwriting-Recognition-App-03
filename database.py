@@ -72,7 +72,7 @@ class CustomDataset(Base):
     actual_digit = Column(Integer)
     is_verified = Column(Boolean, default=False)
     dataset_type = Column(String(50))  
-    metadata = Column(JSON)
+    meta_data = Column(JSON)
 
 class SystemLog(Base):
     __tablename__ = 'system_logs'
@@ -129,13 +129,13 @@ class AdvancedDatabaseManager:
         self.session.add(feedback)
         self.session.commit()
     
-    def add_custom_dataset_entry(self, user_id, image_path, actual_digit,dataset_type='training', metadata=None):
+    def add_custom_dataset_entry(self, user_id, image_path, actual_digit,dataset_type='training', meta_data=None):
         entry = CustomDataset(
             user_id=user_id,
             image_path=image_path,
             actual_digit=actual_digit,
             dataset_type=dataset_type,
-            metadata=metadata or {}
+            meta_data=meta_data or {}
         )
         self.session.add(entry)
         self.session.commit()

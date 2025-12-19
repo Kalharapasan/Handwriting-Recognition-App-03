@@ -22,7 +22,7 @@ class AdvancedModelTrainer:
         self.training_time = 0
     
     def load_data(self, use_augmentation=True):
-        (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data
+        (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
         x_train = x_train.astype('float32') / 255.0
         x_test = x_test.astype('float32') / 255.0
         x_train = x_train.reshape(-1, 28, 28, 1)
