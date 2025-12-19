@@ -22,6 +22,17 @@
                 <button class="nav-tab" onclick="showTab('analytics')">📈 Analytics</button>
                 <button class="nav-tab" onclick="showTab('training')">🔧 Model Training</button>
             </div>
+
+            <div id="dashboard" class="tab-content active">
+                <div class="card-grid" id="statsGrid">
+                    <!-- Stats will be loaded here -->
+                </div>
+
+                <div class="chart-container">
+                    <h2>Recent Predictions</h2>
+                    <canvas id="predictionsChart"></canvas>
+                </div>
+            </div>
             
 
         </div>
