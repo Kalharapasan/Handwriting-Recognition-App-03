@@ -651,6 +651,32 @@
             };
             reader.readAsDataURL(file);
 
+            document.getElementById('uploadResult').innerHTML = '<div class="spinner"></div>';
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('user_id', currentUser);
+
+            try {
+                const response = await fetch('/api/predict-upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    displayPredictionResult(result);
+                    showToast('File processed successfully!', 'success');
+                } else {
+                    showToast('File processing failed', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('Error processing file', 'error');
+            }
+        }
+
     
     </script>
 
