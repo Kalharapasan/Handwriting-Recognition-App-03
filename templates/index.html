@@ -544,6 +544,39 @@
                 loadAnalytics();
             }
         }
+
+        async function predictDrawing() {
+            const imageData = canvas.toDataURL('image/png');
+            
+            document.getElementById('drawingResult').innerHTML = '<div class="spinner"></div>';
+
+            try {
+                const response = await fetch('/api/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        image_data: imageData,
+                        user_id: currentUser,
+                        enhancement_level: 1.0
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    displayPredictionResult(result);
+                    showToast('Prediction successful!', 'success');
+                } else {
+                    showToast('Prediction failed', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('Error making prediction', 'error');
+            }
+        }
+
     
     </script>
 
