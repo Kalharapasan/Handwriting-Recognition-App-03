@@ -13,6 +13,7 @@ import os
 import time
 from datetime import datetime
 import logging
+from contextlib import asynccontextmanager
 
 from database import db_manager, AdvancedDatabaseManager
 from utils import AdvancedImagePreprocessor, AdvancedModelManager, OCRProcessor, DataAugmentor
@@ -22,25 +23,39 @@ from config import config
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Global variables for managers
+image_preprocessor = None
+model_manager = None
+ocr_processor = None
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    global image_preprocessor, model_manager, ocr_processor
+    logger.info("Starting Handwriting Recognition API...")
+    config.create_directories()
+    os.makedirs("templates", exist_ok=True)
+    os.makedirs("data/exports", exist_ok=True)
+    
+    # Initialize managers
+    image_preprocessor = AdvancedImagePreprocessor()
+    model_manager = AdvancedModelManager(config.MODEL_PATH)
+    ocr_processor = OCRProcessor()
+    
+    if model_manager.model is None:
+        logger.warning("No model loaded. Please train a model or provide a pre-trained model.")
+    else:
+        logger.info(f"Model loaded successfully: {model_manager.model_version}")
+    
+    logger.info("API ready to accept requests")
+    yield
+    # Shutdown code if needed
+
 app = FastAPI(
     title="Advanced Handwriting Recognition API",
     description="AI-powered handwriting recognition system with FastAPI",
-    version="2.0.0"
+    version="2.0.0",
+    lifespan=lifespan
 )
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-os.makedirs("static", exist_ok=True)
-app.mount("/static", StaticFiles(directory="static"), name="static")
-image_preprocessor = AdvancedImagePreprocessor()
-model_manager = AdvancedModelManager(config.MODEL_PATH)
-ocr_processor = OCRProcessor()
 
 class PredictionRequest(BaseModel):
     image_data: str 
@@ -456,20 +471,7 @@ def save_uploaded_file(file: UploadFile, contents: bytes):
     
     return file_path
 
-@app.on_event("startup")
-async def startup_event():
-    logger.info("Starting Handwriting Recognition API...")
-    config.create_directories()
-    os.makedirs("templates", exist_ok=True)
-    os.makedirs("data/exports", exist_ok=True)
-    if model_manager.model is None:
-        logger.warning("No model loaded. Please train a model or provide a pre-trained model.")
-    else:
-        logger.info(f"Model loaded successfully: {model_manager.model_version}")
-    
-    logger.info("API ready to accept requests")
-    
-    
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("fastapi_app:app", host="0.0.0.0", port=8000, reload=True)
