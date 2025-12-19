@@ -9,7 +9,7 @@ class Config:
     IMG_HEIGHT = 28
     IMG_WIDTH = 28
     BATCH_SIZE = 32
-    EPOCHS = 100
+    EPOCHS = 1
     MAX_FILE_SIZE = 50 * 1024 * 1024  
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'bmp', 'pdf', 'txt'}
     ENABLE_REAL_TIME_TRAINING = True
