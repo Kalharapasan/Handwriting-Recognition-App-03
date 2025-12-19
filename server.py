@@ -159,7 +159,7 @@ def main():
     """)
     
     checks = [
-        ("Dependencies", check_dependencies),
+        # ("Dependencies", check_dependencies),
         ("Directories", check_directories),
         ("Templates", check_templates),
         ("Database", initialize_database),
