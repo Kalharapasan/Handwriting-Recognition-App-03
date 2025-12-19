@@ -21,7 +21,7 @@ def check_dependencies():
         'uvicorn',
         'tensorflow',
         'numpy',
-        'opencv-python',
+        'cv2',
         'PIL',
         'sqlalchemy'
     ]
