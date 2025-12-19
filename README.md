@@ -255,7 +255,7 @@ handwriting-recognition-fastapi/
 ├── database.py             # Database models and manager
 ├── model_trainer.py        # Model training utilities
 ├── utils.py                # Image processing and utilities
-├── requirements_fastapi.txt # Dependencies
+├── requirements.txt # Dependencies
 ├── templates/
 │   └── index.html         # Web interface
 ├── models/                 # Trained models
