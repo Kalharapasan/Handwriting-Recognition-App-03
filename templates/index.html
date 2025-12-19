@@ -713,6 +713,41 @@
             }
         }
 
+        async function loadAnalytics() {
+            try {
+                const response = await fetch('/api/analytics/predictions?limit=100');
+                const result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('analyticsContent').innerHTML = `
+                        <h3>Recent Predictions (${result.count})</h3>
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                            <thead>
+                                <tr style="background: #f8f9fa;">
+                                    <th style="padding: 10px; text-align: left;">Time</th>
+                                    <th style="padding: 10px; text-align: left;">Digit</th>
+                                    <th style="padding: 10px; text-align: left;">Confidence</th>
+                                    <th style="padding: 10px; text-align: left;">Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${result.data.map(pred => `
+                                    <tr>
+                                        <td style="padding: 10px;">${new Date(pred.timestamp).toLocaleString()}</td>
+                                        <td style="padding: 10px; font-weight: bold; font-size: 1.2rem;">${pred.predicted_digit}</td>
+                                        <td style="padding: 10px;">${(pred.confidence * 100).toFixed(2)}%</td>
+                                        <td style="padding: 10px;">${pred.user_input_type}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading analytics:', error);
+            }
+        }
+
     
     </script>
 
