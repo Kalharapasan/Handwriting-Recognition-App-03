@@ -577,6 +577,41 @@
             }
         }
 
+        function displayPredictionResult(result) {
+            const confidence = (result.confidence * 100).toFixed(2);
+            const confidenceClass = confidence > 80 ? 'high' : confidence > 50 ? 'medium' : 'low';
+
+            let html = `
+                <div class="prediction-result">
+                    <h3>Prediction Result</h3>
+                    <div class="prediction-digit">${result.predicted_digit}</div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: ${confidence}%">
+                            ${confidence}% Confident
+                        </div>
+                    </div>
+                    <p>Processing Time: ${(result.processing_time * 1000).toFixed(2)}ms</p>
+            `;
+
+            if (result.all_predictions) {
+                html += '<div class="all-predictions">';
+                result.all_predictions.forEach((prob, digit) => {
+                    const percentage = (prob * 100).toFixed(1);
+                    html += `
+                        <div class="prediction-item">
+                            <div class="digit">${digit}</div>
+                            <div class="probability">${percentage}%</div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
+
+            html += '</div>';
+
+            document.getElementById('drawingResult').innerHTML = html;
+        }
+
     
     </script>
 
