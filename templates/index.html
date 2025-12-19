@@ -642,6 +642,15 @@
             }
         }
 
+        async function handleFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('uploadPreview').innerHTML = `
+                    <img src="${e.target.result}" style="max-width: 400px; border-radius: 10px; margin: 20px 0;">
+                `;
+            };
+            reader.readAsDataURL(file);
+
     
     </script>
 
