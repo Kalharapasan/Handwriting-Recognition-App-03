@@ -110,7 +110,7 @@ async def root():
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard():
     try:
-        with open("templates/index.html", "r") as f:
+        with open("templates/index.html", "r", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
         return HTMLResponse(content="<h1>Dashboard loading...</h1><p>Template file not found. Please ensure templates/index.html exists.</p>")

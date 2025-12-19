@@ -1,6 +1,6 @@
 import sqlite3
 import pandas as pd
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, Float, Text, Boolean, JSON
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, Float, Text, Boolean, JSON, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy import ForeignKey
