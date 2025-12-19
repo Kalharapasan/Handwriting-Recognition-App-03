@@ -794,6 +794,19 @@
             }
         }
 
+        async function checkModelStatus() {
+            try {
+                const response = await fetch('/api/model/status');
+                const result = await response.json();
+
+                if (!result.model_loaded) {
+                    showToast('No model loaded. Please train a model first.', 'error');
+                }
+            } catch (error) {
+                console.error('Error checking model status:', error);
+            }
+        }
+
     
     </script>
 
