@@ -57,6 +57,17 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+os.makedirs("static", exist_ok=True)
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 class PredictionRequest(BaseModel):
     image_data: str 
     user_id: int = 1
@@ -82,7 +93,7 @@ class TrainingConfig(BaseModel):
 @app.get("/", response_class=HTMLResponse)
 async def root():
     try:
-        with open("/home/claude/templates/index.html", "r") as f:
+        with open("templates/index.html", "r") as f:
             return f.read()
     except FileNotFoundError:
         return """
@@ -99,10 +110,10 @@ async def root():
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard():
     try:
-        with open("/home/claude/templates/dashboard.html", "r") as f:
+        with open("templates/index.html", "r") as f:
             return f.read()
     except FileNotFoundError:
-        return HTMLResponse(content="<h1>Dashboard loading...</h1>")
+        return HTMLResponse(content="<h1>Dashboard loading...</h1><p>Template file not found. Please ensure templates/index.html exists.</p>")
 
 @app.get("/health")
 async def health_check():
@@ -474,4 +485,4 @@ def save_uploaded_file(file: UploadFile, contents: bytes):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("fastapi_app:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("fastapi_app:app", host="0.0.0.0", port=8000, reload=False)
