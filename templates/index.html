@@ -748,6 +748,52 @@
             }
         }
 
+        async function startTraining() {
+            const config = {
+                use_hyperparameter_tuning: document.getElementById('useHyperparameter').checked,
+                use_augmentation: document.getElementById('useAugmentation').checked,
+                epochs: parseInt(document.getElementById('epochs').value),
+                batch_size: parseInt(document.getElementById('batchSize').value)
+            };
+
+            document.getElementById('trainingStatus').innerHTML = `
+                <div class="prediction-result">
+                    <div class="spinner"></div>
+                    <h3>Training in progress...</h3>
+                    <p>This may take several minutes. Please wait.</p>
+                </div>
+            `;
+
+            try {
+                const response = await fetch('/api/train', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(config)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    document.getElementById('trainingStatus').innerHTML = `
+                        <div class="prediction-result">
+                            <h3>✅ Training Completed!</h3>
+                            <p>Test Accuracy: ${(result.test_accuracy * 100).toFixed(2)}%</p>
+                            <p>Training Time: ${result.training_time.toFixed(2)}s</p>
+                        </div>
+                    `;
+                    showToast('Model trained successfully!', 'success');
+                } else {
+                    showToast('Training failed', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('Error during training', 'error');
+                document.getElementById('trainingStatus').innerHTML = '';
+            }
+        }
+
     
     </script>
 
