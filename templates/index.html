@@ -677,6 +677,42 @@
             }
         }
 
+        async function loadDashboard() {
+            try {
+                const response = await fetch('/api/analytics/system');
+                const result = await response.json();
+
+                if (result.success) {
+                    const data = result.data;
+                    
+                    document.getElementById('statsGrid').innerHTML = `
+                        <div class="card">
+                            <div class="card-icon">👥</div>
+                            <div class="card-title">Total Users</div>
+                            <div class="card-value">${data.total_users}</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🔢</div>
+                            <div class="card-title">Total Predictions</div>
+                            <div class="card-value">${data.total_predictions}</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🎯</div>
+                            <div class="card-title">System Accuracy</div>
+                            <div class="card-value">${(data.system_accuracy * 100).toFixed(1)}%</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📊</div>
+                            <div class="card-title">Today's Usage</div>
+                            <div class="card-value">${data.today_predictions}</div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+            }
+        }
+
     
     </script>
 
