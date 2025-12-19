@@ -33,6 +33,20 @@
                     <canvas id="predictionsChart"></canvas>
                 </div>
             </div>
+
+            <div id="drawing" class="tab-content">
+                <div class="drawing-container">
+                    <h2 style="text-align: center; margin-bottom: 20px;">Draw a Digit (0-9)</h2>
+                    <canvas id="drawingCanvas" width="400" height="400"></canvas>
+                    
+                    <div style="text-align: center;">
+                        <button class="btn btn-primary" onclick="predictDrawing()">🔍 Predict</button>
+                        <button class="btn btn-danger" onclick="clearCanvas()">🗑️ Clear</button>
+                    </div>
+
+                    <div id="drawingResult"></div>
+                </div>
+            </div>
             
 
         </div>
