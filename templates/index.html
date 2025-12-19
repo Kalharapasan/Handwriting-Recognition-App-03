@@ -463,6 +463,13 @@
         let canvas, ctx;
         let isDrawing = false;
         let currentUser = 1;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initCanvas();
+            loadDashboard();
+            setupDropZone();
+            checkModelStatus();
+        });
     
     </script>
 
